@@ -1,0 +1,127 @@
+
+
+
+// function App() {
+//   const [podcastData, setPodcastData] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [seasonVisibility, setSeasonVisibility] = useState({});
+//   const [showAllSeasons, setShowAllSeasons] = useState(true); // State to control all seasons visibility
+//   const [showAllDiv, setShowAllDiv] = useState(true); // State to control the visibility of the entire div
+//   fetchPodcastData()
+//   .then((podcastData) => {
+//     if (podcastData) {
+   
+//       useEffect(() => {
+//         // Fetch data from the URL
+//         fetch(`https://podcast-api.netlify.app/id/${podcastData[1].id}`)
+//           .then((response) => {
+//             // Check if the response status is OK (HTTP status code 200)
+//             if (!response.ok) {
+//               throw new Error(`Network response was not ok (status ${response.status})`);
+//             }
+//             // Parse the response body as JSON
+//             return response.json();
+//           })
+//           .then((data) => {
+//             // Once the data is successfully parsed as JSON, update state
+//             setPodcastData(data);
+//             setLoading(false);
+//           })
+//           .catch((error) => {
+//             // Handle any errors that occur during the fetch or JSON parsing
+//             setError(error);
+//             setLoading(false);
+//           });
+//       }, []);
+    
+//       // Function to toggle episode visibility for a specific season
+//       const toggleSeasonVisibility = (seasonIndex) => {
+//         setSeasonVisibility((prevVisibility) => ({
+//           ...prevVisibility,
+//           [seasonIndex]: !prevVisibility[seasonIndex],
+//         }));
+//       };
+    
+//       // Function to toggle visibility of all seasons
+//       const toggleAllSeasonsVisibility = () => {
+//         setSeasonVisibility((prevVisibility) => {
+//           const newVisibility = {};
+//           for (let i = 0; i < podcastData.seasons.length; i++) {
+//             newVisibility[i] = !showAllSeasons; // Toggle visibility based on the current state
+//           }
+//           setShowAllSeasons(!showAllSeasons); // Toggle the state for the button
+//           return newVisibility;
+//         });
+//       };
+    
+//       // Function to toggle visibility of the entire div
+//       const toggleAllDivVisibility = () => {
+//         setShowAllDiv(!showAllDiv);
+//       };
+    
+//       if (loading) {
+//         return <div>Loading...</div>;
+//       }
+    
+//       if (error) {
+//         return <div>Error: {error.message}</div>;
+//       }
+    
+//       return (
+//         <div>
+//           <h1>{podcastData.title}</h1>
+//           <p>{podcastData.description}</p>
+//           <button onClick={toggleAllDivVisibility}>
+//             {showAllDiv ? 'Hide All Components' : 'Show All Components'}
+//           </button>
+//           {showAllDiv && (
+//             <div id='collapsThis'>
+//               <button onClick={toggleAllSeasonsVisibility}>
+//                 {showAllSeasons ? 'Hide All Seasons' : 'Show All Seasons'}
+//               </button>
+//               {podcastData.seasons.map((season, index) => (
+//                 <div key={season.season}>
+//                   <h2>
+//                     Season {season.season}: {season.title}
+//                     <button onClick={() => toggleSeasonVisibility(index)}>
+//                       Toggle Episodes
+//                     </button>
+//                   </h2>
+//                   {season.image && (
+//                     <img src={season.image} alt={`Season ${season.season} Image`} />
+//                   )}
+//                   {(showAllSeasons || seasonVisibility[index]) && (
+//                     <div id={`seasons${index + 1}`}>
+//                       <ul>
+//                         {season.episodes.map((episode) => (
+//                           <li key={episode.episode}>
+//                             <h3>Episode {episode.episode}: {episode.title}</h3>
+//                             {episode.image && (
+//                               <img
+//                                 src={episode.image}
+//                                 alt={`Episode ${episode.episode} Image`}
+//                               />
+//                             )}
+//                             <p>{episode.description}</p>
+//                           </li>
+//                         ))}
+//                       </ul>
+//                     </div>
+//                   )}
+//                 </div>
+//               ))}
+//             </div>
+//           )}
+//         </div>
+//       );
+//     }
+    
+
+    
+//     }
+//   })
+//   .catch((error) => {
+//     console.error("Error:", error);
+//   });
+//   export default App;
