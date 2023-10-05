@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 async function fetchPodcastData() {
   try {
-    const response = await fetch("https://podcast-api.netlify.app");
+    const response = await fetch("https://podcast-api.netlify.app/shows");
     const data = await response.json();
     return data;
   } catch (error) {
@@ -92,19 +92,20 @@ function App() {
         </button>
         {isOpen && (
           <ul>
-            {/*collaps this*/}
             {childPodcastData.seasons.map((season) => (
-              <li key={`${uniqueID}-${season.title}`}>
-                <h1>Season: {season.season}</h1>
+              <li key={`season-${uniqueID}-${season.title}`}>
+                <h1>Season: {season.season} ({season.title})</h1>
                 <ul>
                   {season.episodes.map((episode) => (
-                    <div>
-                      <button>
-                        <li key={`${uniqueID}-${season.title}-${episode.title}`}>
-                          {episode.title}
-                        </li>
-                      </button>
-                    </div>
+                    <li key={`episode-${uniqueID}-${season.title}-${episode.title}`}>
+                      <h3>Season:{season.season} Episode: {episode.episode} </h3>
+                      {episode.title}
+                      <h5>{episode.description}</h5>
+                      <audio controls>
+                        <source src={episode.file} type="audio/mp3"/>
+                        <h1>{episode.id}</h1>
+                      </audio>
+                    </li>
                   ))}
                 </ul>
               </li>
@@ -120,7 +121,7 @@ function App() {
       <h1>Podcast Episodes</h1>
       <ul>
         {podcastData.map((episode) => (
-          <li key={episode.id}>
+          <li key={`episode-${episode.id}`}>
             <h1>
               <a
                 href={`https://podcast-api.netlify.app/id/${episode.id}`}
@@ -130,13 +131,12 @@ function App() {
                 {episode.id}
               </a>
             </h1>
-            <h2>{episode.title}</h2>
-            <p>{episode.description}</p>
+            <h2 className="titles">{episode.title}</h2>
+            <p className="descriptions">{episode.description}</p>
             <p>Seasons: {episode.seasons}</p>
             <img src={episode.image} alt={`Episode ${episode.id} Image`} />
             <p>Genres: {episode.genres.join(", ")}</p>
             <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
-            <h1>Child Info Below:</h1>
             <div id="display_info">
               <GetSpesInfo uniqueID={episode.id} />
             </div>
