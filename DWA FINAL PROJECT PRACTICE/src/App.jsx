@@ -43,7 +43,7 @@ function App() {
     }
   }
 
-  function GetSpesInfo({ uniqueID }) {
+  function GetSpesInfo({ uniqueID, episodeImage }) {
     const [childPodcastData, setChildPodcastData] = useState([]);
     const [childLoading, setChildLoading] = useState(true);
     const [childError, setChildError] = useState(null);
@@ -67,18 +67,16 @@ function App() {
 
     const toggleOpen = () => {
       if (isOpen) {
-        // If the section is open, close it
         setOpenSections((prevOpenSections) =>
           prevOpenSections.filter((id) => id !== uniqueID)
         );
       } else {
-        // If the section is closed, open it and close others
         setOpenSections([uniqueID]);
       }
     };
 
     if (childLoading) {
-      return <div>Loading...</div>;
+      return <button>{isOpen ? "Expanding" : "Collapsing"}</button>;
     }
 
     if (childError) {
@@ -91,18 +89,29 @@ function App() {
           {isOpen ? "Collapse" : "Expand"} {/* Button to collapse/expand */}
         </button>
         {isOpen && (
-          <ul>
+          <ul className={`my-content ${isOpen ? "isNowOpen" : ""}`} >
+            <img src={episodeImage} alt="Episode Image" className="reimg"/>
             {childPodcastData.seasons.map((season) => (
-              <li key={`season-${uniqueID}-${season.title}`}>
-                <h1>Season: {season.season} ({season.title})</h1>
+              <li
+                key={`season-${uniqueID}-${season.title}`}
+                className="orderedList"
+               
+              >
+                <button onClick={fullcollapse} id="uniqua" className="floatright">
+                  Collapse All
+                </button>
+                
+                <h1 className="Season-title">Season: {season.season} ({season.title})</h1>
                 <ul>
                   {season.episodes.map((episode) => (
-                    <li key={`episode-${uniqueID}-${season.title}-${episode.title}`}>
-                      <h3>Season:{season.season} Episode: {episode.episode} </h3>
+                    <li key={`episode-${uniqueID}-${season.title}-${episode.title}`} className="listopti">
+                      <h3 className="he">
+                        Season:{season.season} Episode: {episode.episode}
+                      </h3>
                       {episode.title}
                       <h5>{episode.description}</h5>
                       <audio controls>
-                        <source src={episode.file} type="audio/mp3"/>
+                        <source src={episode.file} type="audio/mp3" />
                         <h1>{episode.id}</h1>
                       </audio>
                     </li>
@@ -116,29 +125,33 @@ function App() {
     );
   }
 
+  function fullcollapse() {
+    setOpenSections([]);
+  }
+
   return (
     <div>
-      <h1>Podcast Episodes</h1>
-      <ul>
+      <h1 style={{ marginLeft: "33%" }}>Listen Along With US</h1>
+      <ul className="ulgrid">
         {podcastData.map((episode) => (
-          <li key={`episode-${episode.id}`}>
+          <li key={`episode-${episode.id}`} id={episode.id} className="mainorder">
             <h1>
               <a
                 href={`https://podcast-api.netlify.app/id/${episode.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {episode.id}
+                {/*episode.id*/}
               </a>
             </h1>
             <h2 className="titles">{episode.title}</h2>
+            <img src={episode.image} alt={`Episode ${episode.id} Image`} />
             <p className="descriptions">{episode.description}</p>
             <p>Seasons: {episode.seasons}</p>
-            <img src={episode.image} alt={`Episode ${episode.id} Image`} />
             <p>Genres: {episode.genres.join(", ")}</p>
             <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
             <div id="display_info">
-              <GetSpesInfo uniqueID={episode.id} />
+              <GetSpesInfo uniqueID={episode.id} episodeImage={episode.image} />
             </div>
           </li>
         ))}

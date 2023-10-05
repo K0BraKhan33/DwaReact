@@ -4,6 +4,128 @@
 body{
   display: flex;
 }
+
+
+.orderedList{
+  transition: 2s;
+  background-color: rgba(255, 140, 0, 0.2);
+ 
+  margin-bottom:5% ;
+  
+}
+.listopti{
+  background-color: #160b0bef;
+  color: rgb(255, 255, 255);
+}
+.he{
+  color: rgb(255, 123, 0);
+}
+.Season-title{
+  display: block;
+  float: center;
+  font-size: 5vw;
+
+
+  background-color: #f700ff63;
+  color: rgba( 0, 132, 255);
+}
+li {
+  width: 90%;
+  border: 1px solid #ddd; 
+
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+/* Add a CSS class for expanded sections */
+.my-content.isNowOpen {
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white; /* Add background color if needed */
+  backface-visibility: 100%;
+  overflow-y: auto; /* Add scrollbars if the content overflows */
+  z-index: 1; /* Ensure it's on top of other content */
+  transition: 2s ease
+}
+
+/* Style the close button for expanded sections */
+.my-content.isNowOpen button.close-button {
+  transition: 2s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  backface-visibility: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 2s ease
+}
+
+.reimg{width:100%;
+  z-index: -1;
+  position: fixed;
+height:100%}
+/* Add this CSS code to style your podcast list */
+ul {
+  display: flex;
+  flex-wrap: wrap; /* Prevent items from wrapping to the next line */
+  overflow-x: auto; /* Add horizontal scrolling if necessary */
+  list-style-type: none; /* Remove default list styles */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+.mainorder {
+  width: 80%;
+  flex: 0 0 auto; /* Make each item equally wide */
+  margin-right: 20px; /* Adjust the spacing between items */
+}
+
+/* Add this CSS code to style your podcast list */
+.ulgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr)); /* Adjust the minimum and maximum column width as needed */
+  grid-gap: 20px; /* Adjust the spacing between items */
+  list-style-type: none; /* Remove default list styles */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+
+.collapsible-section {
+  position: relative;
+}
+.floatright {
+  position: fixed;
+  z-index: 999;
+  top: 1vw; /* Adjust this value to control the vertical positioning */
+  right: 1vw; /* Adjust this value to control the horizontal positioning */
+  left: 79vw;
+  width: 20vw
+}
+
+.floating-button {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+
 .container {
   font-family: Arial, sans-serif;
   max-width: 800px;
@@ -43,33 +165,38 @@ img.episode-image {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 /* Style for the list of episodes */
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+
 
 /* Style for individual episode items */
-li {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  margin-left: 5%;
-  margin-right: 5%;
-}
+
 button {width:100%;
 height : 5%}
 
 /* Style for episode images */
 img {
-  max-width: 10%;
+  float: bottom;
+  max-width: 100%;
   height: auto;
   display: block;
   margin: 10px 0;
 }
 .titles{
   font-size: 2vw;
+  padding-top: 0%;
+  width: 25vw;
+  height:2vw;
 }
+
 .descriptions{
-  font-size: 1.5vw
+  font-size: 1.5vw;
+  height: 20%;
+  font-size: 0.9;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical; 
+  overflow-x: hidden; 
+  overflow-y: scroll;
+  padding-bottom: 2vw;
+  margin-bottom: 2vw;
+  color: rgba(var(--color-dark), 0.8)
 }
