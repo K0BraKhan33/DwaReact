@@ -76,7 +76,7 @@ function App() {
     };
 
     if (childLoading) {
-      return <button>{isOpen ? "Expanding" : "Collapsing"}</button>;
+      return <button className="expand">{isOpen ? "Expanding" : "Collapsing"}</button>;
     }
 
     if (childError) {
@@ -85,7 +85,7 @@ function App() {
 
     return (
       <div>
-        <button onClick={toggleOpen}>
+        <button onClick={toggleOpen} className="expand">
           {isOpen ? "Collapse" : "Expand"} {/* Button to collapse/expand */}
         </button>
         {isOpen && (
@@ -97,7 +97,7 @@ function App() {
                 className="orderedList"
                
               >
-                <button onClick={fullcollapse} id="uniqua" className="floatright">
+                <button onClick={fullcollapse} id="uniqua" className="floatright" >
                   Collapse All
                 </button>
                 
@@ -109,7 +109,8 @@ function App() {
                         Season:{season.season} Episode: {episode.episode}
                       </h3>
                       {episode.title}
-                      <h5>{episode.description}</h5>
+                    
+                      <h5 className="descriptions">{episode.description}</h5>
                       <audio controls>
                         <source src={episode.file} type="audio/mp3" />
                         <h1>{episode.id}</h1>
@@ -145,7 +146,7 @@ function App() {
               </a>
             </h1>
             <h2 className="titles">{episode.title}</h2>
-            <img src={episode.image} alt={`Episode ${episode.id} Image`} />
+            <img src={episode.image} alt={`Episode ${episode.id} Image`} className="imga" />
             <p className="descriptions">{episode.description}</p>
             <p>Seasons: {episode.seasons}</p>
             <p>Genres: {episode.genres.join(", ")}</p>
