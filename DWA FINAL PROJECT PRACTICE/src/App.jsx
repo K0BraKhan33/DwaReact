@@ -132,10 +132,10 @@ function App() {
 
   return (
     <div>
-      <h1 style={{ marginLeft: "33%" }}>Listen Along With US</h1>
-      <ul className="ulgrid">
+      <h1 className="intro">Listen Along With US</h1>
+      <div className="ulgrid">
         {podcastData.map((episode) => (
-          <li key={`episode-${episode.id}`} id={episode.id} className="mainorder">
+          <div key={`episode-${episode.id}`} id={episode.id} className="mainorder">
             <h1>
               <a
                 href={`https://podcast-api.netlify.app/id/${episode.id}`}
@@ -154,9 +154,9 @@ function App() {
             <div id="display_info">
               <GetSpesInfo uniqueID={episode.id} episodeImage={episode.image} />
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
