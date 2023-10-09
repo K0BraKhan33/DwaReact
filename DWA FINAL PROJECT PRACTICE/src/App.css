@@ -2,66 +2,77 @@
 
 /* Style for the main container */
 body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
+
   overflow-x: hidden;
-  background-color: rgb(255, 0, 0);
+
+  background-color: rgb(217, 239, 219);
   color: white;
   scroll-behavior: none;
 }
 /*hearts*/
-.heart { 
-    position: relative; 
-    width: 50%; 
-    height: 90px; 
-    background-color: #007bff00
-} 
-
-.heart:before, .heart:after { 
-    position: absolute; 
-    content: ""; 
-    left: 50px; 
-    top: 0; 
-    width: 50px; 
-    height: 80px; 
-    background: rgb(255, 0, 0); 
-    border-radius: 50px 50px 0 0; 
-    transform: rotate(-45deg); 
-    transform-origin: 0 100%; 
-} 
-
-.heart:after { 
-    left: 0; 
-    transform: rotate(45deg); 
-    transform-origin :100% 100%; 
+.heart {
+  background-color: #33333300;
+  display: inline-block;
+  width: 25%;
+  aspect-ratio: 1;
+  border-image: radial-gradient(rgb(0, 0, 0) 69%, #0000 70%) 84.5%/50%;
+  clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+}
+.heart_like {
+  background-color: #33333300;
+  display: inline-block;
+  width: 25%;
+  aspect-ratio: 1;
+  border-image: radial-gradient(red 69%, #0000 70%) 84.5%/50%;
+  clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+}
+/* .heart:before,
+.heart:after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 0;
+  width: 20%;
+  height: 30vh;
+  background: rgb(0, 0, 0);
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
 }
 
-.heart_like { 
-  position: relative; 
-  width: 100px; 
-  height: 90px; 
-  background-color: #007bff00;
-} 
-
-.heart_like:before, .heart_like:after { 
-  position: absolute; 
-  content: ""; 
-  left: 50px; 
-  top: 0; 
-  width: 50px; 
-  height: 80px; 
-  background: rgb(0, 0, 0); 
-  border-radius: 50px 50px 0 0; 
-  transform: rotate(-45deg); 
-  transform-origin: 0 100%; 
-} 
-
-.heart_like:after { 
-  left: 0; 
-  transform: rotate(45deg); 
-  transform-origin :100% 100%; 
+.heart:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
 }
+
+.heart_like {
+  position: relative;
+  width: 40%; 
+  height: 30vh; 
+  background-color: #ff000000;
+}
+
+.heart_like:before,
+.heart_like:after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 0;
+  width: 20%;
+  height: 30vh; 
+  background: rgb(255, 0, 0);
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.heart_like:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+} */
+
 
 /* Default styles for your elements */
 .my-element {
@@ -172,30 +183,48 @@ ul {
   margin: 0;
 }
 
-.mainorder {
-  padding: 0.5% 1%;
-  background: rgb(255, 136, 0);
-  border-radius: 8px;
-  width: 25%;
-  min-height: 25%;
-  height: 10%;
-  margin: 0;
-}
+
 /* Add this CSS rule to control visibility */
 .mainorder.hideable {
   display: none; /* Initially hide elements with class 'orderedList' */
 }
 
+.mainorder {
+  max-width: 20%;
+  max-height: 70%;
+  width: 20%;
+  height: 70%;
+  background: rgb(255, 136, 0);
+ 
 
+ }
 /* Add this CSS code to style your podcast list */
 .ulgrid {
-  display: flex;
-  gap: 25px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: 0;
-  width: 9%;
+width:100vw;
+display: flex;
+overflow-x: auto;
+
 }
+.ulgrid::-webkit-scrollbar{
+  width: 10%;
+}
+
+
+.ulgrid.likesMode {
+  width:100vw;
+  display: flex;
+  overflow-x: auto;
+  
+}
+.mainorder.likesMode{
+  max-width: 20%;
+  max-height: 70%;
+  width: 20%;
+  height: 70%;
+  background: rgb(255, 136, 0);
+ 
+}
+
 
 .collapsible-section {
   position: relative;
@@ -280,8 +309,10 @@ img.episode-image {
 }
 
 .titles {
-  font-size: 2vw;
+  font-size: 1.5vw;
   padding-top: 0;
+  margin:0;
+  position: center;
   width: 25vw;
   height: 2vw;
 }
@@ -301,56 +332,3 @@ img.episode-image {
   color: rgba(var(--color-dark), 0.8);
 }
 
-/* Apply scaling when the window width is less than or equal to 767px */
-@media screen and (max-width: 767px) {
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-    background-color: rgb(255, 68, 0);
-    color: white;
-    scroll-behavior: none;
-  }
-  p{
-
-  }
-
-  .mainorder {
-    padding: 0.5% 1%;
-    background: rgb(255, 136, 0);
-    border-radius: 8px;
-    width: 100%; /* Changed the width to 100% for responsiveness */
-    min-height: 25%;
-    height: auto; /* Changed height to auto for responsiveness */
-    margin: 0;
-  }
-
-  /* Add this CSS code to style your podcast list */
-  .ulgrid {
-    display: flex;
-    gap: 25px;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    height: 200%;
-    scroll-padding-left: 0;
-    width: 100%; /* Changed the width to 100% for responsiveness */
-  }
-
-
-.descriptions {
-  font-size: 1.5vw;
-  height: 25%;
-  min-height: 15vw ;
-  width: 100%;
-  font-size: 0.9rem; /* Fixed font-size value */
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding-bottom: 0;
-  margin-bottom: 0;
-  color: rgba(var(--color-dark), 0.8);
-}
-}

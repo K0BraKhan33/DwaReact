@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toggleclass } from "./heart.jsx";
 import SortLikes from "./SortByLike.jsx";
+import Defaulted from "./SortByDefault.jsx";
 async function fetchPodcastData() {
   try {
     const response = await fetch("https://podcast-api.netlify.app/shows");
@@ -135,6 +136,8 @@ function App() {
     <div >
       <h1 className="intro">Listen Along With US</h1>
       <SortLikes userId={podcastData}/>
+      <Defaulted />
+    
       <div className="ulgrid">
         {podcastData.map((episode) => (
           <div key={`episode-${episode.id}`} id={episode.id} className="mainorder">
@@ -154,7 +157,7 @@ function App() {
             <p>Seasons: {episode.seasons}</p>
             <p>Genres: {episode.genres.join(", ")}</p>
             <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
-            <button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}>heart</button>
+            <button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}></button>
 
             <div id="display_info">
               <GetSpesInfo uniqueID={episode.id} episodeImage={episode.image} />
