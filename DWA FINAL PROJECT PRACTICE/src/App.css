@@ -5,8 +5,8 @@ body {
 
   overflow-x: hidden;
 
-  background-color: rgb(217, 239, 219);
-  color: white;
+  background-color: rgb(88, 71, 151);
+  color: rgb(255, 255, 255);
   scroll-behavior: none;
 }
 /*hearts*/
@@ -85,7 +85,7 @@ body {
 /* Add more media queries and element styles as needed */
 
 .intro {
-  color: #da6b55;
+  color: #9d589b;
 }
 
 .expand {
@@ -96,13 +96,13 @@ body {
   width: 100%;
   height: auto;
   margin-bottom: 0;
-  background-color: white;
-  color: rgb(255, 111, 0);
+  background-color: #9d589b;
+  color: rgb(255, 255, 255);
 }
 
 .orderedList {
   transition: 2s;
-  background-color: rgba(255, 140, 0, 0.2);
+  background-color: rgba(128, 255, 0, 0.2);
   margin-bottom: 10%;
 }
 
@@ -194,7 +194,7 @@ ul {
   max-height: 70%;
   width: 20%;
   height: 70%;
-  background: rgb(255, 136, 0);
+  background: rgb(37, 26, 84);
  
 
  }
