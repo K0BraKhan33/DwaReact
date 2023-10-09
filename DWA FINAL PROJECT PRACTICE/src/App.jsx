@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { toggleclass } from "./heart.jsx";
 import SortLikes from "./SortByLike.jsx";
 import Defaulted from "./SortByDefault.jsx";
+import SortButton from "./sortAlphaUp.jsx";
+import SortDownButton from "./sortZatadown.jsx";
 async function fetchPodcastData() {
   try {
     const response = await fetch("https://podcast-api.netlify.app/shows");
@@ -137,8 +139,12 @@ function App() {
       <h1 className="intro">Listen Along With US</h1>
       <SortLikes userId={podcastData}/>
       <Defaulted />
+      <SortButton podcastData={podcastData} setPodcastData={setPodcastData} />
+      <SortDownButton podcastData={podcastData} setPodcastData={setPodcastData}/>
+
     
       <div className="ulgrid">
+        {/*this is the unique code that i want to swop*/}
         {podcastData.map((episode) => (
           <div key={`episode-${episode.id}`} id={episode.id} className="mainorder">
             
