@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { toggleclass } from "./heart.jsx";
 import SortLikes from "./SortByLike.jsx";
-import Defaulted from "./SortByDefault.jsx";
-import SortButton from "./sortAlphaUp.jsx";
+import removeHideableClass from "./SortByDefault.jsx";
+import sortButton from "./sortAlphaUp.jsx";
 import SortDownButton from "./sortZatadown.jsx";
+
 async function fetchPodcastData() {
   try {
     const response = await fetch("https://podcast-api.netlify.app/shows");
@@ -47,7 +48,7 @@ function App() {
     }
   }
 
-  function GetSpesInfo({ uniqueID, episodeImage }) {
+  function GetSpesInfo({ uniqueID, episodeImage, isOpen, toggleOpen }) {
     const [childPodcastData, setChildPodcastData] = useState([]);
     const [childLoading, setChildLoading] = useState(true);
     const [childError, setChildError] = useState(null);
@@ -67,18 +68,6 @@ function App() {
       fetchData();
     }, [uniqueID]);
 
-    const isOpen = openSections.includes(uniqueID);
-
-    const toggleOpen = () => {
-      if (isOpen) {
-        setOpenSections((prevOpenSections) =>
-          prevOpenSections.filter((id) => id !== uniqueID)
-        );
-      } else {
-        setOpenSections([uniqueID]);
-      }
-    };
-
     if (childLoading) {
       return <button className="expand">{isOpen ? "Expanding" : "Collapsing"}</button>;
     }
@@ -89,22 +78,17 @@ function App() {
 
     return (
       <div>
-        <button onClick={toggleOpen} className="expand">
-          {isOpen ? "Collapse" : "Expand"} {/* Button to collapse/expand */}
-        </button>
         {isOpen && (
-          <ul className={`my-content ${isOpen ? "isNowOpen" : ""}`} >
-            <img src={episodeImage} alt="Episode Image" className="reimg"/>
+          <ul className={`my-content ${isOpen ? "isNowOpen" : ""}`}>
+            <img src={episodeImage} alt="Episode Image" className="reimg" />
             {childPodcastData.seasons.map((season) => (
               <li
                 key={`season-${uniqueID}-${season.title}`}
                 className="orderedList"
-               
               >
-                <button onClick={fullcollapse} id="uniqua" className="floatright" >
+                <button onClick={fullcollapse} id="uniqua" className="floatright">
                   Collapse All
                 </button>
-                
                 <h1 className="Season-title">Season: {season.season} ({season.title})</h1>
                 <ul>
                   {season.episodes.map((episode) => (
@@ -113,7 +97,6 @@ function App() {
                         Season:{season.season} Episode: {episode.episode}
                       </h3>
                       {episode.title}
-                    
                       <h5 className="descriptions">{episode.description}</h5>
                       <audio controls>
                         <source src={episode.file} type="audio/mp3" />
@@ -134,48 +117,84 @@ function App() {
     setOpenSections([]);
   }
 
+  function handleSelectChange(event) {
+    const selectedValue = event.target.value;
+  
+    switch (selectedValue) {
+      case "sortAlphaUp":
+        sortButton(); // Change to sortButton()
+        break;
+      case "sortByDefault":
+        removeHideableClass(); // Change to removeHideableClass()
+        break;
+      case "sortByLike":
+        SortLikes(); // Change to SortLikes()
+        break;
+      case "sortZataDown":
+        SortDownButton(); // Change to SortDownButton()
+        break;
+    }}
+  
   return (
-    <div >
+    <div>
       <h1 className="intro">Listen Along With US</h1>
-      <SortLikes userId={podcastData}/>
-      <Defaulted />
-      <SortButton podcastData={podcastData} setPodcastData={setPodcastData} />
-      <SortDownButton podcastData={podcastData} setPodcastData={setPodcastData}/>
+      <select onChange={handleSelectChange}>
+  <option value="sortAlphaUp">Sort Alpha Up</option>
+  <option value="sortByDefault">Sort By Default</option>
+  <option value="sortByLike">Sort By Like</option>
+  <option value="sortZataDown">Sort Zata Down</option>
+</select>
 
-    
+
       <div className="ulgrid">
-        {/*this is the unique code that i want to swop*/}
-        {podcastData.map((episode) => (
-          <div key={`episode-${episode.id}`} id={episode.id} className="mainorder">
-            
-            <h1>
-              <a
-                href={`https://podcast-api.netlify.app/id/${episode.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {/*episode.id*/}
-              </a>
-            </h1>
-            <h2 className="titles">{episode.title}</h2>
-            <img src={episode.image} alt={`Episode ${episode.id} Image`} className="imga" />
-            <p className="descriptions">{episode.description}</p>
-            <p>Seasons: {episode.seasons}</p>
-            <p>Genres: {episode.genres.join(", ")}</p>
-            <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
-            <button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}></button>
+        {podcastData.map((episode) => {
+          const isOpen = openSections.includes(episode.id);
 
-            <div id="display_info">
-              <GetSpesInfo uniqueID={episode.id} episodeImage={episode.image} />
+          const toggleOpen = () => {
+            if (isOpen) {
+              setOpenSections((prevOpenSections) =>
+                prevOpenSections.filter((id) => id !== episode.id)
+              );
+            } else {
+              setOpenSections([...openSections, episode.id]);
+            }
+          };
+
+          return (
+            <div key={`episode-${episode.id}`} id={episode.id} className="mainorder">
+              <h1>
+                <a
+                  href={`https://podcast-api.netlify.app/id/${episode.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {/*episode.id*/}
+                </a>
+              </h1>
+              <button onClick={toggleOpen} className="expand">
+                {isOpen ? "Collapse" : "Expand"} {/* Button to collapse/expand */}
+              </button>
+              <h2 className="titles">{episode.title}</h2>
+              <img src={episode.image} alt={`Episode ${episode.id} Image`} className="imga" />
+              <p className="descriptions">{episode.description}</p>
+              <p>Seasons: {episode.seasons}</p>
+              <p>Genres: {episode.genres.join(", ")}</p>
+              <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
+              <button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}></button>
+              <div id="display_info">
+                <GetSpesInfo
+                  uniqueID={episode.id}
+                  episodeImage={episode.image}
+                  isOpen={isOpen}
+                  toggleOpen={toggleOpen}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
 }
-
-
-
 
 export default App;

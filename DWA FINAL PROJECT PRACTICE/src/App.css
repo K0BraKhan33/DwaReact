@@ -4,11 +4,13 @@
 body {
 
   overflow-x: hidden;
+  font-size: 1.5vw;
 
   background-color: rgb(88, 71, 151);
   color: rgb(255, 255, 255);
   scroll-behavior: none;
 }
+
 /*hearts*/
 .heart {
   background-color: #33333300;
@@ -18,6 +20,7 @@ body {
   border-image: radial-gradient(rgb(0, 0, 0) 69%, #0000 70%) 84.5%/50%;
   clip-path: polygon(-41% 0, 50% 91%, 141% 0);
 }
+
 .heart_like {
   background-color: #33333300;
   display: inline-block;
@@ -26,6 +29,7 @@ body {
   border-image: radial-gradient(red 69%, #0000 70%) 84.5%/50%;
   clip-path: polygon(-41% 0, 50% 91%, 141% 0);
 }
+
 /* .heart:before,
 .heart:after {
   position: absolute;
@@ -109,7 +113,7 @@ body {
 audio {
   padding-bottom: 20%;
   margin-top: 10%;
-  width:100%;
+  width: 100%;
   height: 100%;
 }
 
@@ -124,7 +128,8 @@ audio {
 
 .Season-title {
   display: block;
-  text-align: center; /* Changed 'float' to 'text-align' */
+  text-align: center;
+  /* Changed 'float' to 'text-align' */
   font-size: 5vw;
   background-color: #f700ff63;
   color: rgba(0, 132, 255);
@@ -135,7 +140,8 @@ li {
   border: 2px solid #da6b55;
   border-radius: 20px;
   background-color: rgba(255, 123, 0, 0.82);
-  padding: 0 8%; /* Combined padding properties */
+  padding: 0 8%;
+  /* Combined padding properties */
   margin-bottom: 0;
   margin-left: 5%;
 }
@@ -186,43 +192,53 @@ ul {
 
 /* Add this CSS rule to control visibility */
 .mainorder.hideable {
-  display: none; /* Initially hide elements with class 'orderedList' */
+  display: none;
+  /* Initially hide elements with class 'orderedList' */
 }
 
 .mainorder {
-  max-width: 20%;
-  max-height: 70%;
-  width: 20%;
-  height: 70%;
-  background: rgb(37, 26, 84);
- 
 
- }
-/* Add this CSS code to style your podcast list */
-.ulgrid {
-width:100vw;
-display: flex;
-overflow-x: auto;
+  max-width: 40%;
+  width: 40%;
+  height: 100%;
+  background: rgb(37, 26, 84);
+  border-radius: 5%;
+  border: solid;
+  border-color: #9d589b;
 
 }
-.ulgrid::-webkit-scrollbar{
+
+/* Add this CSS code to style your podcast list */
+.ulgrid {
+  width: 100vw;
+  gap: 1%;
+  height: 50vw;
+  display: flex;
+  overflow-x: auto;
+
+}
+
+.ulgrid::-webkit-scrollbar {
   width: 10%;
 }
 
 
 .ulgrid.likesMode {
-  width:100vw;
+  width: 100vw;
   display: flex;
   overflow-x: auto;
-  
+
 }
-.mainorder.likesMode{
-  max-width: 20%;
-  max-height: 70%;
-  width: 20%;
-  height: 70%;
-  background: rgb(255, 136, 0);
- 
+
+.mainorder.likesMode {
+  max-width: 40%;
+  width: 40%;
+  height: 100%;
+  background: rgb(37, 26, 84);
+  border-radius: 5%;
+  border: solid;
+  border-color: #9d589b;
+
 }
 
 
@@ -274,10 +290,10 @@ h1 {
 }
 
 /* Style for the podcast description */
-p { 
+.p {
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
-  font-size: 2vw;
+  font-size: 1.5vw;
 }
 
 /* Style for season and episode headings */
@@ -311,7 +327,7 @@ img.episode-image {
 .titles {
   font-size: 1.5vw;
   padding-top: 0;
-  margin:0;
+  margin: 0;
   position: center;
   width: 25vw;
   height: 2vw;
@@ -319,9 +335,10 @@ img.episode-image {
 
 .descriptions {
   font-size: 1.5vw;
-  min-height: 15vw ;
-  height: 10%;
-  font-size: 0.9rem; /* Fixed font-size value */
+ 
+  height: 15%;
+  font-size: 0.9rem;
+  /* Fixed font-size value */
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
@@ -331,4 +348,3 @@ img.episode-image {
   margin-bottom: 0;
   color: rgba(var(--color-dark), 0.8);
 }
-

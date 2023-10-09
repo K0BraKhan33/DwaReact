@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from "react";
-
 function SortLikes() {
   const [heartLikeIds, setHeartLikeIds] = useState([]);
-
-  useEffect(() => {
-    // This effect can be used to fetch and set the initial list of heart_like IDs if needed.
-  }, []);
 
   const sortinglikes = () => {
     // Get the heart_like elements
@@ -14,7 +8,6 @@ function SortLikes() {
     ulgridElements.forEach((element) => {
       element.classList.add("likesMode");
     });
-    
 
     // Extract and store the IDs in an array, removing the "like" prefix
     const ids = Array.from(elementHeart).map((element) =>
@@ -40,12 +33,6 @@ function SortLikes() {
     });
   };
 
-  return (
-    <div>
-      <button onClick={sortinglikes}>Sort by likes</button>
-    </div>
-  );
+  // You can add a button or trigger event to call sortinglikes when needed
 }
-
-export default SortLikes;
-
+export default SortLikes();
