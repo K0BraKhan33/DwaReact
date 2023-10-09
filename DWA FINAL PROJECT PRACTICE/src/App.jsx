@@ -134,7 +134,7 @@ function App() {
   return (
     <div >
       <h1 className="intro">Listen Along With US</h1>
-      <SortLikes />
+      <SortLikes userId={podcastData}/>
       <div className="ulgrid">
         {podcastData.map((episode) => (
           <div key={`episode-${episode.id}`} id={episode.id} className="mainorder">
@@ -165,5 +165,8 @@ function App() {
     </div>
   );
 }
+
+
+
 
 export default App;
