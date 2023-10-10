@@ -1,7 +1,5 @@
 function SortLikes() {
-  const [heartLikeIds, setHeartLikeIds] = useState([]);
-
-  const sortinglikes = () => {
+  const sortingLikes = () => {
     // Get the heart_like elements
     const elementHeart = document.querySelectorAll(".heart_like");
     var ulgridElements = document.querySelectorAll(".ulgrid");
@@ -17,9 +15,6 @@ function SortLikes() {
     // Log the IDs to the console
     console.log("Heart Like IDs:", ids);
 
-    // You can also update the state with the IDs if needed
-    setHeartLikeIds(ids);
-
     // Compare IDs of orderedList to heart_like and add/remove the "hidable" class
     const elementList = document.querySelectorAll(".mainorder");
     elementList.forEach((sList) => {
@@ -32,7 +27,9 @@ function SortLikes() {
       }
     });
   };
+  sortingLikes()
 
-  // You can add a button or trigger event to call sortinglikes when needed
+  // You can add a button or trigger event to call sortingLikes when needed
 }
-export default SortLikes();
+
+export default SortLikes;

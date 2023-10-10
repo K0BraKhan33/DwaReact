@@ -5,6 +5,7 @@ body {
 
   overflow-x: hidden;
   font-size: 1.5vw;
+  overflow-y: hidden;
 
   background-color: rgb(88, 71, 151);
   color: rgb(255, 255, 255);
@@ -13,21 +14,55 @@ body {
 
 /*hearts*/
 .heart {
+position: right;
+padding-top:10% ;
   background-color: #33333300;
+  outline: none;
   display: inline-block;
-  width: 25%;
+  margin-left: 35%;
+  width: 20%;
   aspect-ratio: 1;
-  border-image: radial-gradient(rgb(0, 0, 0) 69%, #0000 70%) 84.5%/50%;
+  border-image: radial-gradient(rgb(88, 71, 151) 69%, #0000 70%) 84.5%/50%;
   clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+  cursor: pointer; /* Add cursor pointer to make it clear it's clickable */
+  animation: unpulse 0.5s 1 alternate; /* Add a pulsing animation */
 }
 
 .heart_like {
+  position: right;
   background-color: #33333300;
+  outline: none;
   display: inline-block;
-  width: 25%;
+  margin-left: 35%;
+  width: 20%;
   aspect-ratio: 1;
-  border-image: radial-gradient(red 69%, #0000 70%) 84.5%/50%;
+  border-image: radial-gradient(#e778e3 69%, #0000 70%) 84.5%/50%;
   clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+  animation: pulse 0.5s 1 alternate; /* Add a pulsing animation */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes unpulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* .heart:before,
@@ -89,7 +124,7 @@ body {
 /* Add more media queries and element styles as needed */
 
 .intro {
-  color: #9d589b;
+  color: #e778e3;
 }
 
 .expand {
@@ -106,15 +141,16 @@ body {
 
 .orderedList {
   transition: 2s;
-  background-color: rgba(128, 255, 0, 0.2);
+  background-color: rgba(88, 71, 151, 0.296);
   margin-bottom: 10%;
 }
 
 audio {
-  padding-bottom: 20%;
-  margin-top: 10%;
-  width: 100%;
-  height: 100%;
+  padding-bottom: 0%;
+  margin-top: 2%;
+  margin-bottom: 4%;
+  width: 60vw;
+  height: 5vh;
 }
 
 .listopti {
@@ -123,7 +159,7 @@ audio {
 }
 
 .he {
-  color: rgb(255, 123, 0);
+  color: #eec3ed;
 }
 
 .Season-title {
@@ -136,8 +172,10 @@ audio {
 }
 
 li {
+  overflow-x: hidden;
+  overflow-y: hidden;
   width: 90%;
-  border: 2px solid #da6b55;
+  border: 2px solid #e778e3;
   border-radius: 20px;
   background-color: rgba(255, 123, 0, 0.82);
   padding: 0 8%;
@@ -200,22 +238,24 @@ ul {
 
   max-width: 40%;
   width: 40%;
-  height: 100%;
+  height: 95%;
   background: rgb(37, 26, 84);
   border-radius: 5%;
   border: solid;
   border-color: #9d589b;
 
 }
-
+select{
+  height: 10%;
+}
 /* Add this CSS code to style your podcast list */
 .ulgrid {
   width: 100vw;
   gap: 1%;
-  height: 50vw;
+  height: 44vw;
   display: flex;
   overflow-x: auto;
-
+overflow-y: hidden;
 }
 
 .ulgrid::-webkit-scrollbar {
@@ -225,15 +265,17 @@ ul {
 
 .ulgrid.likesMode {
   width: 100vw;
+  gap: 1%;
+  height: 44vw;
   display: flex;
   overflow-x: auto;
-
+  overflow-y: hidden;
 }
 
 .mainorder.likesMode {
   max-width: 40%;
   width: 40%;
-  height: 100%;
+  height: 95%;
   background: rgb(37, 26, 84);
   border-radius: 5%;
   border: solid;
@@ -255,7 +297,7 @@ ul {
   width: 20%;
   height: 7%;
   margin-bottom: 0;
-  background-color: rgba(255, 89, 0, 0.311);
+  background-color: rgba(68, 3, 58, 0.459);
   color: rgb(255, 255, 255);
 }
 
@@ -290,7 +332,7 @@ h1 {
 }
 
 /* Style for the podcast description */
-.p {
+p {
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
   font-size: 1.5vw;
@@ -319,7 +361,7 @@ img.episode-image {
 .imga {
   float: bottom;
   width: 50%;
-  height: auto;
+  height: 30%;
   display: block;
   margin-left: 23%;
 }
@@ -329,6 +371,7 @@ img.episode-image {
   padding-top: 0;
   margin: 0;
   position: center;
+  color: white;
   width: 25vw;
   height: 2vw;
 }

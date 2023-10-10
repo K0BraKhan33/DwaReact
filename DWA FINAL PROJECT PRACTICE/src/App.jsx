@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { toggleclass } from "./heart.jsx";
-import SortLikes from "./SortByLike.jsx";
+import sortLikes from "./SortByLike.jsx";
 import removeHideableClass from "./SortByDefault.jsx";
 import sortButton from "./sortAlphaUp.jsx";
-import SortDownButton from "./sortZatadown.jsx";
+import sortDownButton from "./sortZatadown.jsx";
 
 async function fetchPodcastData() {
   try {
@@ -87,7 +87,7 @@ function App() {
                 className="orderedList"
               >
                 <button onClick={fullcollapse} id="uniqua" className="floatright">
-                  Collapse All
+                  Close Podcast
                 </button>
                 <h1 className="Season-title">Season: {season.season} ({season.title})</h1>
                 <ul>
@@ -122,27 +122,29 @@ function App() {
   
     switch (selectedValue) {
       case "sortAlphaUp":
-        sortButton(); // Change to sortButton()
+        sortButton(podcastData, setPodcastData); // Change to sortButton()
         break;
       case "sortByDefault":
         removeHideableClass(); // Change to removeHideableClass()
         break;
       case "sortByLike":
-        SortLikes(); // Change to SortLikes()
+        sortLikes(); // Change to SortLikes()
         break;
       case "sortZataDown":
-        SortDownButton(); // Change to SortDownButton()
+        sortDownButton(podcastData, setPodcastData); // Change to SortDownButton()
         break;
     }}
   
   return (
     <div>
       <h1 className="intro">Listen Along With US</h1>
+      
       <select onChange={handleSelectChange}>
-  <option value="sortAlphaUp">Sort Alpha Up</option>
+ 
   <option value="sortByDefault">Sort By Default</option>
   <option value="sortByLike">Sort By Like</option>
   <option value="sortZataDown">Sort Zata Down</option>
+  <option value="sortAlphaUp">Sort Alpha Up</option>
 </select>
 
 
@@ -178,9 +180,10 @@ function App() {
               <img src={episode.image} alt={`Episode ${episode.id} Image`} className="imga" />
               <p className="descriptions">{episode.description}</p>
               <p>Seasons: {episode.seasons}</p>
-              <p>Genres: {episode.genres.join(", ")}</p>
+              <p>Genres: {episode.genres.join(", ")} <button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}></button>
+            </p>
               <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
-              <button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}></button>
+              
               <div id="display_info">
                 <GetSpesInfo
                   uniqueID={episode.id}
