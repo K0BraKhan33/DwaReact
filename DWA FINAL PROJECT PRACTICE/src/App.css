@@ -6,12 +6,44 @@ body {
   overflow-x: hidden;
   font-size: 1.5vw;
   overflow-y: hidden;
+  
 
   background-color: rgb(88, 71, 151);
   color: rgb(255, 255, 255);
   scroll-behavior: none;
 }
-
+@keyframes fadeOut {
+  0% {
+   opacity: 0;
+  }
+  50% {
+   opacity: 0.5;
+  }
+  100% {
+   opacity: 1;
+   display: none;
+  }
+}
+.greetings{
+  z-index: 10000;
+  width:2000%;
+  padding-top: 10vw;
+  height: 100vh;
+  background-color: #9d589b;
+  animation: fadeOut 1s linear;
+}
+.greetingsH1{
+  font-size: 20vw;
+  padding-left: 5vw;
+  color:#ffffff
+}
+.greetingsButton{
+  width: 50vw;
+  height: 25%;
+  margin-left: 25vw;
+  font-size: 5vw;
+  background-color: #0000;
+}
 /*hearts*/
 .heart {
 position: right;
@@ -126,15 +158,74 @@ padding-top:10% ;
 .intro {
   color: #e778e3;
 }
+@keyframes rotateClockwise {
+  0% {
+    transform: rotate(0deg) scale(1);
+  
+}
+25% {
+  transform: rotate(180deg) scale(1.5);
 
+}
+
+50% {
+    transform: rotate(360deg) scale(2);
+   
+}
+75% {
+  transform: rotate(180deg) scale(1.5);
+
+}
+100% {
+  transform: rotate(0deg) scale(1);
+
+}
+}
+
+@keyframes rotateAntiClockwise {
+  0% {
+      transform: rotate(0deg) scale(1);
+    
+  }
+  25% {
+    transform: rotate(-180deg) scale(1.5);
+  
+}
+
+  50% {
+      transform: rotate(-360deg) scale(2);    
+     
+  }
+  75% {
+    transform: rotate(-180deg) scale(1.5);
+  
+}
+  100% {
+    transform: rotate(0deg) scale(1);
+  
+}
+}
+
+.logo{
+  width:3.5%;
+  height: auto;
+  animation: rotateClockwise 7s linear infinite, rotateAntiClockwise 7s linear infinite
+}
+.logo_l{
+  margin-left: 20vw;
+  width:3.5%;
+  height: auto;
+  animation:  rotateAntiClockwise 7s linear infinite, rotateClockwise 7s linear infinite
+}
 .expand {
   font-size: 1.5vw;
   display: block;
+  margin: 1%;
+  margin-left: 2%;
   position: relative;
   bottom: 0;
-  width: 100%;
+  width: 95%;
   height: auto;
-  margin-bottom: 0;
   background-color: #9d589b;
   color: rgb(255, 255, 255);
 }
@@ -368,7 +459,11 @@ img.episode-image {
 
 .titles {
   font-size: 1.5vw;
-  padding-top: 0;
+  padding-top: 1%;
+  padding-bottom: 10%;
+  padding-left:10%;
+  padding-right: 1%;
+  overflow-y: auto;
   margin: 0;
   position: center;
   color: white;

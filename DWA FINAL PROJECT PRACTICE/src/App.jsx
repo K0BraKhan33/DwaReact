@@ -5,6 +5,18 @@ import removeHideableClass from "./SortByDefault.jsx";
 import sortButton from "./sortAlphaUp.jsx";
 import sortDownButton from "./sortZatadown.jsx";
 
+const genreMap = {
+  1: "Personal Growth",
+  2: "True Crime and Investigative Journalism",
+  3: "History",
+  4: "Comedy",
+  5: "Entertainment",
+  6: "Business",
+  7: "Fiction",
+  8: "News",
+  9: "Kids and Family",
+};
+
 async function fetchPodcastData() {
   try {
     const response = await fetch("https://podcast-api.netlify.app/shows");
@@ -48,7 +60,7 @@ function App() {
     }
   }
 
-  function GetSpesInfo({ uniqueID, episodeImage, isOpen, toggleOpen }) {
+  function GetSpesInfo({ uniqueID, episodeImage, isOpen, toggleOpen, episode }) {
     const [childPodcastData, setChildPodcastData] = useState([]);
     const [childLoading, setChildLoading] = useState(true);
     const [childError, setChildError] = useState(null);
@@ -119,7 +131,7 @@ function App() {
 
   function handleSelectChange(event) {
     const selectedValue = event.target.value;
-  
+
     switch (selectedValue) {
       case "sortAlphaUp":
         sortButton(podcastData, setPodcastData); // Change to sortButton()
@@ -133,20 +145,19 @@ function App() {
       case "sortZataDown":
         sortDownButton(podcastData, setPodcastData); // Change to SortDownButton()
         break;
-    }}
-  
+    }
+  }
+
   return (
     <div>
-      <h1 className="intro">Listen Along With US</h1>
+      <h1 className="intro"><img className="logo_l"type="png" src="./favicon_package_v0.16/android-chrome-512x512.png"></img> Listen Along With US <img className="logo"type="png" src="./favicon_package_v0.16/android-chrome-512x512.png"></img></h1>
       
       <select onChange={handleSelectChange}>
- 
-  <option value="sortByDefault">Sort By Default</option>
-  <option value="sortByLike">Sort By Like</option>
-  <option value="sortZataDown">Sort Zata Down</option>
-  <option value="sortAlphaUp">Sort Alpha Up</option>
-</select>
-
+        <option value="sortByDefault">Sort By Default</option>
+        <option value="sortByLike">Sort By Like</option>
+        <option value="sortZataDown">Sort Alpha Down</option>
+        <option value="sortAlphaUp">Sort Alpha Up</option>
+      </select>
 
       <div className="ulgrid">
         {podcastData.map((episode) => {
@@ -163,7 +174,7 @@ function App() {
           };
 
           return (
-            <div key={`episode-${episode.id}`} id={episode.id} className="mainorder">
+            <div key={`episode-${episode.id}`} id={episode.id} className="mainorder" >
               <h1>
                 <a
                   href={`https://podcast-api.netlify.app/id/${episode.id}`}
@@ -173,29 +184,30 @@ function App() {
                   {/*episode.id*/}
                 </a>
               </h1>
+              <h2 className="titles">{episode.title}</h2>
+              <img src={episode.image} alt={`Episode ${episode.id} Image`} className="imga" />
               <button onClick={toggleOpen} className="expand">
                 {isOpen ? "Collapse" : "Expand"} {/* Button to collapse/expand */}
               </button>
-              <h2 className="titles">{episode.title}</h2>
-              <img src={episode.image} alt={`Episode ${episode.id} Image`} className="imga" />
               <p className="descriptions">{episode.description}</p>
               <p>Seasons: {episode.seasons}</p>
-              <p>Genres: {episode.genres.join(", ")} <button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}></button>
-            </p>
+              <p>Genres: {episode.genres.map((genreId) => genreMap[genreId]).join(", ")} <button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}></button></p>
               <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
-              
               <div id="display_info">
                 <GetSpesInfo
                   uniqueID={episode.id}
                   episodeImage={episode.image}
                   isOpen={isOpen}
                   toggleOpen={toggleOpen}
+                  episode={episode} 
                 />
               </div>
             </div>
+            
           );
         })}
       </div>
+      
     </div>
   );
 }
