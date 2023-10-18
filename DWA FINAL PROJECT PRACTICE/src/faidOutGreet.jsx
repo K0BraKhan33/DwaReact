@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-
+import App from './App.jsx';
 export default function Greetings() {
   const [isVisible, setIsVisible] = useState(true);
 
   const handleHide = () => {
     setIsVisible(false);
+
   };
 
   return (
