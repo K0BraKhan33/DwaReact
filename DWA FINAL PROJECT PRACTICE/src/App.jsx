@@ -17,12 +17,7 @@ const genreMap = {
   9: "Kids and Family",
 };
 
-import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://fguewcoipjtuyqdrcbyn.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZndWV3Y29pcGp0dXlxZHJjYnluIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc2MzI3NTMsImV4cCI6MjAxMzIwODc1M30.nFtZKKkIdw5OnJ7WKg0Zgfg0qDZCwUBfoAMKApZTdEA';
-
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 
 async function fetchPodcastData() {
