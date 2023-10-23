@@ -38,6 +38,9 @@ body {
     
   }
 }
+.hide{
+display:none;
+}
 .greetings{
   z-index: 10000;
   width:200%;
@@ -46,7 +49,7 @@ body {
   background-color: #9d589b;
   animation: fadein 1s linear;
 }
-.greetings .clicks{
+.greetings.clicks{
   z-index: 10000;
   width:200%;
   padding-top: 10vw;

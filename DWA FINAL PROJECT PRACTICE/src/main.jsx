@@ -4,16 +4,29 @@ import App from './App.jsx';
 import './App.css';
 import './index.css';
 import Greetings from './faidOutGreet.jsx';
+import Login from './login.jsx';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
- ReactDOM.createRoot(document.getElementById('body')).render(
-   <React.StrictMode>
-   <Greetings key="egg"/>
- </React.StrictMode>
+const route =createBrowserRouter([{
+  path:"/",
+  element: <Login key="egg" classname="greetings"/>,
+
+},
+{
+path:"mains",
+element: <App />,
+
+}])
+
+ ReactDOM.createRoot(document.getElementById('root')).render(
+
+  <RouterProvider router ={route}/>
+ 
  );
 
 
