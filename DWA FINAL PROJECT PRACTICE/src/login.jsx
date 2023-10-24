@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createClient } from '@supabase/supabase-js';
+import advance from "./advance";
 
 
 
@@ -8,67 +9,32 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const supabase = createClient(supabaseUrl, SUPABASE_KEY);
 
-export let loginName = ''; // Initialize with empty string
-export let loginPassword = ''; // Initialize with empty string
-
 
 function Login() {
    
     
     const [data, setData] = useState(null);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    
+    const [username, setUsername] = useState(' ');
+    const [password, setPassword] = useState(' ');
+    //GET USERNAME AND PASSWORD TO IMPORT INTO DETAILS FOR EXPORT TO ADVANCE
 
-    useEffect(() => {
-        fetchData();
-    }, []); // Call fetchData only once when the component mounts
-
-    async function fetchData() {
-        const { data, error } = await supabase
-            .from('Logins')
-            .select('Login_Id, UserName, Password, User_likes');
-
-        if (error) {
-            console.error('Error fetching data:', error);
-        } else {
-            setData(data);
-            console.log(data);
-         
-      
-            
-        }
-    }
-
-    function advance() {
-        if (data) {
-            const found1 = data.find((innerData) => innerData.UserName === username && innerData.Password === password);
-
-            if (found1) {
-                console.log('Logged in');
-                loginName = username; // Update the export variable
-                loginPassword = password;
-                console.log(loginName, loginPassword)
-                
-                window.location.href="/mains";
-            } else {
-                console.log('Logged out');
-            }
-        } else {
-            console.log('Data not available');
-        }
-    }
 
     return (
-        <div>
+        <div id="loginDetails" userName={username} password={password}>
             <h3>Login: <input type="Username" value={username} onChange={(e) => setUsername(e.target.value)} /></h3>
             <h3>Password: <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></h3>
             <div>
-                <button onClick={advance}>Login</button>
+                <button onClick={advance(username,password)}>Login</button>
                 <button>Create New Account</button>
             </div>
         </div>
     );
 }
+// const loginName =advance().loginNameS; // Initialize with empty string
+const deProp=document.getElementById("loginDetails");
+const username= deProp.userName;
+const password=deProp.passord
+
+export const details= advance(username, password)
 
 export default Login;

@@ -1,6 +1,8 @@
   //heart.jsx
-  import { loginName, loginPassword } from "./login";
+  //import { loginName, loginPassword } from "./login";
   import { createClient } from '@supabase/supabase-js';
+  
+
 
   const supabaseUrl = 'https://fguewcoipjtuyqdrcbyn.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZndWV3Y29pcGp0dXlxZHJjYnluIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc2MzI3NTMsImV4cCI6MjAxMzIwODc1M30.nFtZKKkIdw5OnJ7WKg0Zgfg0qDZCwUBfoAMKApZTdEA';
@@ -15,13 +17,13 @@
       if (button.classList.contains("heart")) {
         button.classList.remove("heart");
         button.classList.add("heart_like");
-        console.log(loginName, loginPassword)
+        // console.log(loginName, loginPassword)
 
-        const { data, error } = await supabase
-          .from('Logins')
-          .update({ User_likes: buttonId })
-          .eq('UserName', loginName)
-          .eq('Password', loginPassword);
+        // const { data, error } = await supabase
+        //   .from('Logins')
+        //   .update({ User_likes: buttonId })
+        //   .eq('UserName', loginName)
+        //   .eq('Password', loginPassword);
         
         // Rest of your code...
       } else if (button.classList.contains("heart_like")) {
