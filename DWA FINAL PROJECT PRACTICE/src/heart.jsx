@@ -1,5 +1,7 @@
   //heart.jsx
   //import { loginName, loginPassword } from "./login";
+  import { password, username } from './advance';
+
   import { createClient } from '@supabase/supabase-js';
   
 
@@ -17,6 +19,7 @@
       if (button.classList.contains("heart")) {
         button.classList.remove("heart");
         button.classList.add("heart_like");
+       console.log(username, password);
         // console.log(loginName, loginPassword)
 
         // const { data, error } = await supabase
