@@ -8,12 +8,17 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const supabase = createClient(supabaseUrl, SUPABASE_KEY);
 
+export let loginName = ''; // Initialize with empty string
+export let loginPassword = ''; // Initialize with empty string
+
+
 function Login() {
    
     
     const [data, setData] = useState(null);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    
 
     useEffect(() => {
         fetchData();
@@ -29,6 +34,9 @@ function Login() {
         } else {
             setData(data);
             console.log(data);
+         
+      
+            
         }
     }
 
@@ -38,6 +46,10 @@ function Login() {
 
             if (found1) {
                 console.log('Logged in');
+                loginName = username; // Update the export variable
+                loginPassword = password;
+                console.log(loginName, loginPassword)
+                
                 window.location.href="/mains";
             } else {
                 console.log('Logged out');

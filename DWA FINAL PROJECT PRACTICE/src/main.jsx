@@ -12,6 +12,7 @@ import {
   Link,
 } from "react-router-dom";
 
+
 const route =createBrowserRouter([{
   path:"/",
   element: <Login key="egg" classname="greetings"/>,
@@ -21,7 +22,12 @@ const route =createBrowserRouter([{
 path:"mains",
 element: <App />,
 
-}])
+},
+
+
+
+
+])
 
  ReactDOM.createRoot(document.getElementById('root')).render(
 
