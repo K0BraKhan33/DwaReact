@@ -13,8 +13,8 @@ import {
 } from "react-router-dom";
 
 
-const route =createBrowserRouter([{
-  path:"/",
+const route = createBrowserRouter([{
+  path:"/login",
   element: <Login key="egg" classname="greetings"/>,
 
 },
@@ -24,7 +24,8 @@ element: <App />,
 
 },
 
-
+//outside of router
+//use context api
 
 
 ])

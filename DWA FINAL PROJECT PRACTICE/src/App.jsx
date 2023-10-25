@@ -4,6 +4,7 @@ import sortLikes from "./SortByLike.jsx";
 import removeHideableClass from "./SortByDefault.jsx";
 import sortButton from "./sortAlphaUp.jsx";
 import sortDownButton from "./sortZatadown.jsx";
+import sortByGenre from "./SortByGenre";
 
 const genreMap = {
   1: "Personal Growth",
@@ -16,7 +17,6 @@ const genreMap = {
   8: "News",
   9: "Kids and Family",
 };
-
 
 
 
@@ -153,7 +153,7 @@ function App() {
   function logout(){
    const boollog= window.confirm(['Are you sure you want to log out'])
 if (boollog){
-    window.location.href="/"}
+    window.location.href="/login"}
   }
 
   return (
@@ -182,6 +182,9 @@ if (boollog){
             }
           };
 
+
+
+
           return (
             <div key={`episode-${episode.id}`} id={episode.id} className="mainorder" >
               <h1>
@@ -200,7 +203,17 @@ if (boollog){
               </button>
               <p className="descriptions">{episode.description}</p>
               <p>Seasons: {episode.seasons}</p>
-              <p>Genres: {episode.genres.map((genreId) => genreMap[genreId]).join(", ")} <button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}></button></p>
+              <p>
+            Genres:</p>
+            <div>
+  {episode.genres.map((genreId, index) => (
+    <h2 className="genres" id={`${episode.id}_${genreId}`} onClick={(e) => sortByGenre(e.currentTarget.id, podcastData, setPodcastData)} key={index}>
+      <span>{genreMap[genreId]}</span>
+    </h2>
+  ))}
+</div>
+<button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}></button>
+
               <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
               <div id="display_info">
                 <GetSpesInfo

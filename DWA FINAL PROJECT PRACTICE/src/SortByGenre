@@ -1,0 +1,22 @@
+/**
+ * 
+ * @param genre  
+ * @type genre string
+ * @param podcastData 
+ * @param setPodcastData 
+ */
+
+function sortByGenre(genre, podcastData, setPodcastData) {
+    const position = genre.indexOf('_');
+    const sortby = genre.slice(position+1);
+
+
+    console.log(sortby);
+
+    const sortedData = [...podcastData];
+    const filteredSeries = sortedData.filter(episode => episode.genres.includes(sortby));
+    console.log("Filtered Series:", filteredSeries);
+
+    setPodcastData(filteredSeries);
+}
+export default sortByGenre

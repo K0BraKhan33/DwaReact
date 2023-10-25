@@ -1,8 +1,12 @@
   //heart.jsx
   //import { loginName, loginPassword } from "./login";
-  import { password, username } from './advance';
 
   import { createClient } from '@supabase/supabase-js';
+  import { usernames, passwords } from './advance';
+  
+  // Declare module-level variables
+
+  
   
 
 
@@ -13,13 +17,17 @@
 
   export async function toggleclass(buttonId) { // Add 'async' here
     const button = document.getElementById(buttonId);
+    console.log(buttonId)
 
     if (button) {
+      console.log(usernames, passwords);
       // Check if the button with the specified ID exists
       if (button.classList.contains("heart")) {
         button.classList.remove("heart");
         button.classList.add("heart_like");
-       console.log(username, password);
+      
+
+     
         // console.log(loginName, loginPassword)
 
         // const { data, error } = await supabase

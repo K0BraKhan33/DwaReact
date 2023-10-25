@@ -1,28 +1,36 @@
-import React, { useState } from "react";
-import advance from "./advance";
+    import React, { useState } from "react";
+    import advance from "./advance";
+    
+    function Login() {
 
-function Login() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+        const [username, setUsername] = useState('');
+        const [password, setPassword] = useState('');
+         function sender(){
+            window.location.href = "/mains";}
 
-    const handleLogin = () => {
+        const handleLogin = () => {
         advance(username, password);
+        
+     
+//use useParam
+
+
+        }
+
+        return (
+            <div id="loginDetails" data-usernames={username} data-passwords={password}>
+                <h3 id="usernameN">Login: <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} /></h3>
+                <h3 id="passwordN">Password: <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></h3>
+                <div>
+                    <button onClick={handleLogin}>Login</button>
+                    <button>Create New Account</button>
+                </div>
+            </div>
+        );
     }
 
-    return (
-        <div id="loginDetails" userNames="username" passWords="password">
-            <h3>Login: <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} /></h3>
-            <h3>Password: <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></h3>
-            <div>
-                <button onClick={handleLogin}>Login</button>
-                <button>Create New Account</button>
-            </div>
-        </div>
-    );
-}
-const loginDetails=document.getElementById("loginDetails");
-console.log(loginDetails)
+
+// In a file named loginDetails.js
 
 
-
-export default Login;
+    export default Login;
