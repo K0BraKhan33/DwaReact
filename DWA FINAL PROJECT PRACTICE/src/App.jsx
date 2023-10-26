@@ -1,3 +1,4 @@
+//App.jsx
 import React, { useState, useEffect } from "react";
 import { toggleclass } from "./heart.jsx";
 import sortLikes from "./SortByLike.jsx";
@@ -5,6 +6,18 @@ import removeHideableClass from "./SortByDefault.jsx";
 import sortButton from "./sortAlphaUp.jsx";
 import sortDownButton from "./sortZatadown.jsx";
 import sortByGenre from "./SortByGenre";
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { fetchData } from "./advance.js";
+const searchParams = new URLSearchParams(location.search);
+const username = searchParams.get('username');
+const password = searchParams.get('password');
+
+import { createClient } from '@supabase/supabase-js';
+
+  const supabaseUrl = 'https://fguewcoipjtuyqdrcbyn.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZndWV3Y29pcGp0dXlxZHJjYnluIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc2MzI3NTMsImV4cCI6MjAxMzIwODc1M30.nFtZKKkIdw5OnJ7WKg0Zgfg0qDZCwUBfoAMKApZTdEA';
+
+
 
 const genreMap = {
   1: "Personal Growth",
@@ -36,10 +49,27 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [openSections, setOpenSections] = useState([]); // Store the IDs of open sections
+  const [searchParams] = useSearchParams();
+  const [datalikes,setdata] = useState([]);
+  const username = searchParams.get('username');
+  const password = searchParams.get('password');
+
+
+ 
+  
 
   useEffect(() => {
     async function fetchData() {
       try {
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        const { data, e } = await supabase
+        .from('Logins')
+        .select('User_likes')
+        .eq('UserName', username)
+        .eq('Password', password);
+        const userLikes=data;
+        setdata(userLikes);
+     
         const podcastData = await fetchPodcastData();
         setPodcastData(podcastData);
         setLoading(false);
@@ -51,6 +81,9 @@ function App() {
 
     fetchData();
   }, []);
+
+console.log(datalikes)
+  
 
   async function fetchPodcastSpefData(uniqueID) {
     try {
@@ -158,6 +191,7 @@ if (boollog){
 
   return (
     <div>
+      <h1> Search: <input type="text"> </input></h1>
 
       <h1 className="intro"><img className="logo_l"type="png" src="./favicon_package_v0.16/android-chrome-512x512.png"></img> Listen Along With US <img className="logo"type="png" src="./favicon_package_v0.16/android-chrome-512x512.png"></img></h1>
       <button onClick={ logout}>Log out</button>
@@ -186,7 +220,9 @@ if (boollog){
 
 
           return (
+
             <div key={`episode-${episode.id}`} id={episode.id} className="mainorder" >
+
               <h1>
                 <a
                   href={`https://podcast-api.netlify.app/id/${episode.id}`}
@@ -212,7 +248,12 @@ if (boollog){
     </h2>
   ))}
 </div>
-<button id={`like${episode.id}`} className="heart" onClick={(event) => toggleclass(event.target.id)}></button>
+<button
+  id={`like${episode.id}`}
+  className={datalikes[0].User_likes.split(',').includes(`like${episode.id}`) ? "heart_like" : "heart"}
+  onClick={() => toggleclass(`like${episode.id}`, username, password)}
+></button>
+
 
               <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
               <div id="display_info">

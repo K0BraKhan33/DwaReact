@@ -1,0 +1,38 @@
+.body {
+    font-size: 1.75vw;
+    margin-left: 20vw;
+    width: 50vw;
+    padding-left: 5vw;
+    display: block;
+    border: 2px solid #e778e3;
+    background-color: blueviolet;
+    border-radius: 20px;
+}
+
+.btnholder {
+    width: 45vw;
+    height: 8vw;
+    margin-bottom: 4vw;
+
+    display: flex; /* Use flex container to arrange children horizontally */
+    justify-content: space-between; /* Distribute children with space between them */
+}
+.qur{
+   width:60%;
+    font-size: 1.75vw;
+}
+.btn {
+    background-color:#eec3ed ;
+    
+    margin: 2.3vw;
+    width: 60%;
+    height: 100%;
+  
+}
+
+.inputs { float: inline-end;
+    font-size: 2vw ;
+    margin-left: 10%;
+    width:15vw;
+    height: 2.5vw;
+}

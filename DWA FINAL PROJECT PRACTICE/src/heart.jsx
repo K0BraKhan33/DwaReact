@@ -2,7 +2,6 @@
   //import { loginName, loginPassword } from "./login";
 
   import { createClient } from '@supabase/supabase-js';
-  import { usernames, passwords } from './advance';
   
   // Declare module-level variables
 
@@ -15,42 +14,60 @@
 
   const supabase = createClient(supabaseUrl, supabaseKey);
 
-  export async function toggleclass(buttonId) { // Add 'async' here
+  export async function toggleclass(buttonId, username, password) {
+    const { data, error } = await supabase
+      .from('Logins')
+      .select('User_likes')
+      .eq('UserName', username)
+      .eq('Password', password);
+  
+    if (error) {
+      console.error(error);
+      return;
+    }
+  
+    const existingUserLikes = data[0].User_likes;
     const button = document.getElementById(buttonId);
-    console.log(buttonId)
-
+  
     if (button) {
-      console.log(usernames, passwords);
-      // Check if the button with the specified ID exists
       if (button.classList.contains("heart")) {
         button.classList.remove("heart");
         button.classList.add("heart_like");
-      
-
-     
-        // console.log(loginName, loginPassword)
-
-        // const { data, error } = await supabase
-        //   .from('Logins')
-        //   .update({ User_likes: buttonId })
-        //   .eq('UserName', loginName)
-        //   .eq('Password', loginPassword);
-        
-        // Rest of your code...
+        // Add 'buttonId' to the existing likes
+        const updatedUserLikes = existingUserLikes ? `${existingUserLikes},${buttonId}` : buttonId;
+  
+        // Update the 'User_likes' field in the database
+        const { updateData, updateError } = await supabase
+          .from('Logins')
+          .update({ User_likes: updatedUserLikes })
+          .eq('UserName', username)
+          .eq('Password', password);
+  
+        if (updateError) {
+          button.classList.remove("heart_like");
+          button.classList.add("heart");
+          console.error(updateError);
+        } 
+       
       } else if (button.classList.contains("heart_like")) {
-        button.classList.remove("heart_like");
-        button.classList.add("heart");
-
-
-
-        // Find the parent <div> and add the "hideable" class
-    
-      } else if (button.classList.contains("heart_like")) {
-        button.classList.remove("heart_like");
-        button.classList.add("heart");
-
-        // Find the parent <div> and remove the "hideable" class
-    
+        // Remove 'buttonId' from the existing likes
+        const updatedUserLikes = existingUserLikes.split(',').filter(like => like !== buttonId).join(',');
+  
+        // Update the 'User_likes' field in the database
+        const { updateData, updateError } = await supabase
+          .from('Logins')
+          .update({ User_likes: updatedUserLikes })
+          .eq('UserName', username)
+          .eq('Password', password);
+  
+        if (updateError) {
+          console.error(updateError);
+        } else {
+          // Update the button's class
+          button.classList.remove("heart_like");
+          button.classList.add("heart");
+        }
       }
     }
   }
+    

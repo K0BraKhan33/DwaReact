@@ -2,39 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './App.css';
+import'./login.css';
 import './index.css';
+import NewAccounts from './createNewAccount.jsx';
 import Greetings from './faidOutGreet.jsx';
 import Login from './login.jsx';
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import { BrowserRouter, Route, Link, Routes, Outlet } from 'react-router-dom';
 
+function Mains() {
+  return (
+    <div>
+      {/* This is your main component content */}
+      <h1>Main Page</h1>
+      <Outlet /> {/* This is where nested route content will be rendered */}
+    </div>
+  );
+}
 
-const route = createBrowserRouter([{
-  path:"/login",
-  element: <Login key="egg" classname="greetings"/>,
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="login" element={<Login />} />
+      <Route path="mains" element={<App />} />
+      <Route path="CreateAccount" element={<NewAccounts />} />
 
-},
-{
-path:"mains",
-element: <App />,
-
-},
-
-//outside of router
-//use context api
-
-
-])
-
- ReactDOM.createRoot(document.getElementById('root')).render(
-
-  <RouterProvider router ={route}/>
- 
- );
-
-
-
+    </Routes>
+  </BrowserRouter>
+);
