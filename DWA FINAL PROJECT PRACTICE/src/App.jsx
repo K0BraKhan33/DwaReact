@@ -11,6 +11,7 @@ import Fuse from 'fuse.js'
 import { fuzzySearch } from "./fuzzy_search.js";
 import { fetchData } from "./advance.js";
 import MediaPlayer from "./mediaPlayer.jsx";
+import { datedown, dateup } from "./dateupdated.js";
 import Greetings from "./faidOutGreet.jsx";
 const searchParams = new URLSearchParams(location.search);
 const username = searchParams.get('username');
@@ -199,8 +200,8 @@ function sendSource(buttonSource,btnID){
                         Season:{season.season} Episode: {episode.episode}
                       </h3>
                       {episode.title}
-                      <h5 className="descriptions">{episode.description}</h5>{`${podcastId}${season.season}${episode.episode}_${episode.file}`}
-                      <button id={`${episodeImage}^${season.season}_${episode.episode}#${episode.file}`} onClick={(e)=>{sendSource(e.target.id)}}> </button>
+                      <h5 className="descriptions">{episode.description}</h5>
+                      <button id={`${episodeImage}^${season.season}_${episode.episode}#${episode.file}`} onClick={(e)=>{sendSource(e.target.id)}}>PLAY EPISODE</button>
                       
                     </li>
                   ))}
@@ -225,7 +226,7 @@ function sendSource(buttonSource,btnID){
         sortButton(podcastData, setPodcastData); // Change to sortButton()
         break;
       case "sortByDefault":
-        removeHideableClass(); // Change to removeHideableClass()
+        removeHideableClass(podcastData, setPodcastData); // Change to removeHideableClass()
         break;  
       case "sortByLike":
         sortLikes(); // Change to SortLikes()
@@ -233,6 +234,12 @@ function sendSource(buttonSource,btnID){
       case "sortZataDown":
         sortDownButton(podcastData, setPodcastData); // Change to SortDownButton()
         break;
+        case "datedown":
+          datedown(podcastData, setPodcastData); // Change to SortDownButton()
+          break;
+          case "dateup":
+            dateup(podcastData, setPodcastData); // Change to SortDownButton()
+            break;
     }
   }
   function logout(){
@@ -304,6 +311,8 @@ if (boollog){
         <option value="sortByLike">Sort By Like</option>
         <option value="sortZataDown">Sort Alpha Down</option>
         <option value="sortAlphaUp">Sort Alpha Up</option>
+        <option value="datedown">Sort by updated old</option>
+        <option value="dateup"> Sort by updated New</option>
       </select> 
             <button onClick={ logout}>Log out</button>
             <button onClick={ ()=>resetUserLikes(username,password)}>Reset likes</button>
@@ -355,7 +364,7 @@ if (boollog){
         <div className="dropdown-content">
                 {episode.genres.map((genreId, index) => (
     <h2 className="genres" id={`${episode.id}_${genreId}`} onClick={(e) => sortByGenre(e.currentTarget.id, podcastData, setPodcastData)} key={index}>
-      <span>{genreMap[genreId]}</span>
+      <span className="genres">  {genreMap[genreId]}</span>
     </h2>
   ))}
   

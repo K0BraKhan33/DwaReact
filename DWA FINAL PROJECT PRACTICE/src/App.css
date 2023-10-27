@@ -1,627 +1,704 @@
-/* App.css */
+  /* App.css */
 
-/* Style for the main container */
-body {
+  /* Style for the main container */
+  body {
 
-  overflow-x: hidden;
-  font-size: 1.5vw;
-  overflow-y: hidden;
-  
+    overflow-x: hidden;
+    font-size: 1.5vw;
+    overflow-y: hidden;
+    
 
-  background-color: rgb(88, 71, 151);
-  color: rgb(255, 255, 255);
-  scroll-behavior: none;
-}
-@keyframes fadeOut {
-  0% {
-   opacity: 0;
+    background-color: rgb(88, 71, 151);
+    color: rgb(255, 255, 255);
+    scroll-behavior: none;
   }
-  50% {
-   opacity: 0.5;
-  }
-  100% {
-   opacity: 1;
-   display: none;
-  }
-}
-@keyframes fadein{
- 
+  @keyframes fadeOut {
     0% {
-     opacity: 0;
+    opacity: 0;
     }
     50% {
-     opacity: 0.5;
+    opacity: 0.5;
     }
     100% {
-     opacity: 1;
-     display: none;
-    
+    opacity: 1;
+    display: none;
+    }
   }
-}
-.hide{
-display:none;
-}
-.greetings{
-  z-index: 10000;
-  width:500%;
-  padding-top: 10vw;
-  height: 100vh;
-  background-color: #9d589b;
-  animation: fadein 1s linear;
-}
-.greetings.clicks{
-  z-index: 10000;
-  width:200%;
-  padding-top: 10vw;
-  height: 100vh;
-  background-color: #9d589b;
-  animation: fadeOut 1s linear;
-}
-.greetingsH1{
-  font-size: 5vw;
-  padding-left: 5vw;
-  color:#ffffff
-}
-.greetingsButton{
-  width: 50vw;
-  height: 25%;
-  margin-left: 25vw;
-  font-size: 5vw;
-  background-color: #0000;
-}
-/*hearts*/
-.heart {
-position: right;
-padding-top:10% ;
-  background-color: #33333300;
-  outline: none;
-  display: inline-block;
-  margin-left: 35%;
-  width: 20%;
-  aspect-ratio: 1;
-  border-image: radial-gradient(rgb(88, 71, 151) 69%, #0000 70%) 84.5%/50%;
-  clip-path: polygon(-41% 0, 50% 91%, 141% 0);
-  cursor: pointer; /* Add cursor pointer to make it clear it's clickable */
-  animation: unpulse 0.5s 1 alternate; /* Add a pulsing animation */
-}
-
-.heart_like {
-  position: right;
-  background-color: #33333300;
-  outline: none;
-  display: inline-block;
-  margin-left: 35%;
-  width: 20%;
-  aspect-ratio: 1;
-  border-image: radial-gradient(#e778e3 69%, #0000 70%) 84.5%/50%;
-  clip-path: polygon(-41% 0, 50% 91%, 141% 0);
-  animation: pulse 0.5s 1 alternate; /* Add a pulsing animation */
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.3);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes unpulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.8);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* .heart:before,
-.heart:after {
-  position: absolute;
-  content: "";
-  left: 50%;
-  top: 0;
-  width: 20%;
-  height: 30vh;
-  background: rgb(0, 0, 0);
-  border-radius: 50% 50% 0 0;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
-}
-
-.heart:after {
-  left: 0;
-  transform: rotate(45deg);
-  transform-origin: 100% 100%;
-}
-
-.heart_like {
-  position: relative;
-  width: 40%; 
-  height: 30vh; 
-  background-color: #ff000000;
-}
-
-.heart_like:before,
-.heart_like:after {
-  position: absolute;
-  content: "";
-  left: 50%;
-  top: 0;
-  width: 20%;
-  height: 30vh; 
-  background: rgb(255, 0, 0);
-  border-radius: 50% 50% 0 0;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
-}
-
-.heart_like:after {
-  left: 0;
-  transform: rotate(45deg);
-  transform-origin: 100% 100%;
-} */
-.ontop {
-  display: block;
-  background-color: #d56b3e;
-  border-radius: 5%;
-  z-index: 99999;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 15vw;
-  height: 15vw;
-  /* Other styles you may want to apply */
-}
-
-.ontop:hover {
-  width: 30vw;
-  height: 30vw;
-}
-
-
-
-.ontop:hover .mediaImage {
-  width: 30vw;
-  height: 30vw;
-
-}
-.x{
-  display: none;
-}
-.ontop:hover .x{
-  display: block;
-}
-
-.ontop:hover .fonties{padding-left:30%;
-  font-size: 2vw;
-bottom: 1.5vw;
-color:#d90f88}
-
-.fonties{padding-left:30%;
-  font-size: 1.5vw;
-bottom: 1.5vw;
-color:#d90f88;
-left: 0.2vw
-}
-.mediaImage{
-  z-index: -1;
-  position:fixed;
-  width:15vw;
-  height:15vw;
-}
-.mediaPlayPause {
-  display: block;
-  opacity: 0.7; /* Specify opacity as a value between 0 and 1 */
-  background-color: #c46f55;
-  z-index: 99999;
-  position: absolute;
-  width: 15vw;
-  height: 15vw;
-  font-size: 5vw;
-  /* Other styles you may want to apply */
-}
-
-.ontop:hover .mediaPlayPause {
-  font-size: 10vw;
-  text-align:left ;
-  display:block;
-  width: 30vw;
-  height: 30vw;
-}
-/* Default styles for your elements */
-.my-element {
-  width: 100px;
-  height: 100px;
-  background-color: blue;
-  transition: transform 0.3s;
-}
-
-/* Add more media queries and element styles as needed */
-
-.intro {
-  color: #e778e3;
-}
-@keyframes rotateClockwise {
-  0% {
-    transform: rotate(0deg) scale(1);
+  @keyframes fadein{
   
-}
-25% {
-  transform: rotate(180deg) scale(1.5);
+      0% {
+      opacity: 0;
+      }
+      50% {
+      opacity: 0.5;
+      }
+      100% {
+      opacity: 1;
+      display: none;
+      
+    }
+  }
+  .hide{
+  display:none;
+  }
+  .greetings{
+    z-index: 10000;
+    width:500%;
+    padding-top: 10vw;
+    height: 100vh;
+    background-color: #9d589b;
+    animation: fadein 1s linear;
+  }
+  .greetings.clicks{
+    z-index: 10000;
+    width:200%;
+    padding-top: 10vw;
+    height: 100vh;
+    background-color: #9d589b;
+    animation: fadeOut 1s linear;
+  }
+  .greetingsH1{
+    font-size: 5vw;
+    padding-left: 5vw;
+    color:#ffffff
+  }
+  .greetingsButton{
+    width: 50vw;
+    height: 25%;
+    margin-left: 25vw;
+    font-size: 5vw;
+    background-color: #0000;
+  }
+  /*hearts*/
+  .heart {
+  position: right;
+  padding-top:10% ;
+    background-color: #33333300;
+    outline: none;
+    display: inline-block;
+    margin-left: 35%;
+    width: 20%;
+    aspect-ratio: 1;
+    border-image: radial-gradient(rgb(88, 71, 151) 69%, #0000 70%) 84.5%/50%;
+    clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+    cursor: pointer; /* Add cursor pointer to make it clear it's clickable */
+    animation: unpulse 0.5s 1 alternate; /* Add a pulsing animation */
+  }
 
-}
+  .heart_like {
+    position: right;
+    background-color: #33333300;
+    outline: none;
+    display: inline-block;
+    margin-left: 35%;
+    width: 20%;
+    aspect-ratio: 1;
+    border-image: radial-gradient(#e778e3 69%, #0000 70%) 84.5%/50%;
+    clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+    animation: pulse 0.5s 1 alternate; /* Add a pulsing animation */
+  }
 
-50% {
-    transform: rotate(360deg) scale(2);
-   
-}
-75% {
-  transform: rotate(180deg) scale(1.5);
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 
-}
-100% {
-  transform: rotate(0deg) scale(1);
+  @keyframes unpulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.8);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 
-}
-}
+  /* .heart:before,
+  .heart:after {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 0;
+    width: 20%;
+    height: 30vh;
+    background: rgb(0, 0, 0);
+    border-radius: 50% 50% 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+  }
 
-@keyframes rotateAntiClockwise {
-  0% {
+  .heart:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+  }
+
+  .heart_like {
+    position: relative;
+    width: 40%; 
+    height: 30vh; 
+    background-color: #ff000000;
+  }
+
+  .heart_like:before,
+  .heart_like:after {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 0;
+    width: 20%;
+    height: 30vh; 
+    background: rgb(255, 0, 0);
+    border-radius: 50% 50% 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+  }
+
+  .heart_like:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+  } */
+  .ontop {
+    display: block;
+    background-color: #d56b3e;
+    border-radius: 5%;
+    z-index: 99999;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15vw;
+    height: 15vw;
+    /* Other styles you may want to apply */
+  }
+
+  .ontop:hover {
+    width: 30vw;
+    height: 30vw;
+  }
+
+
+
+  .ontop:hover .mediaImage {
+    width: 30vw;
+    height: 30vw;
+
+  }
+  .x{
+    display: none;
+  }
+  .ontop:hover .x{
+    display: block;
+  }
+
+  .ontop:hover .fonties{padding-left:30%;
+    font-size: 2vw;
+  bottom: 1.5vw;
+  color:#d90f88}
+
+  .fonties{padding-left:30%;
+    font-size: 1.5vw;
+  bottom: 1.5vw;
+  color:#d90f88;
+  left: 0.2vw
+  }
+  .mediaImage{
+    z-index: -1;
+    position:fixed;
+    width:15vw;
+    height:15vw;
+  }
+  .mediaPlayPause {
+    display: block;
+    opacity: 0.7; /* Specify opacity as a value between 0 and 1 */
+    background-color: #c46f55;
+    z-index: 99999;
+    position: absolute;
+    width: 15vw;
+    height: 15vw;
+    font-size: 5vw;
+    /* Other styles you may want to apply */
+  }
+
+  .ontop:hover .mediaPlayPause {
+    font-size: 10vw;
+    text-align:left ;
+    display:block;
+    width: 30vw;
+    height: 30vw;
+  }
+  /* Default styles for your elements */
+  .my-element {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    transition: transform 0.3s;
+  }
+
+  /* Add more media queries and element styles as needed */
+
+  .intro {
+    color: #e778e3;
+  }
+  @keyframes rotateClockwise {
+    0% {
       transform: rotate(0deg) scale(1);
     
   }
   25% {
-    transform: rotate(-180deg) scale(1.5);
-  
-}
+    transform: rotate(180deg) scale(1.5);
+
+  }
 
   50% {
-      transform: rotate(-360deg) scale(2);    
-     
+      transform: rotate(360deg) scale(2);
+    
   }
   75% {
-    transform: rotate(-180deg) scale(1.5);
-  
-}
+    transform: rotate(180deg) scale(1.5);
+
+  }
   100% {
     transform: rotate(0deg) scale(1);
+
+  }
+  }
+
+  @keyframes rotateAntiClockwise {
+    0% {
+        transform: rotate(0deg) scale(1);
+      
+    }
+    25% {
+      transform: rotate(-180deg) scale(1.5);
+    
+  }
+
+    50% {
+        transform: rotate(-360deg) scale(2);    
+      
+    }
+    75% {
+      transform: rotate(-180deg) scale(1.5);
+    
+  }
+    100% {
+      transform: rotate(0deg) scale(1);
+    
+  }
+  }
+
+  .logo{
+    width:3.5%;
+    height: auto;
+    animation: rotateClockwise 7s linear infinite, rotateAntiClockwise 7s linear infinite
+  }
+  .logo_l{
+    margin-left: 20vw;
+    width:3.5%;
+    height: auto;
+    animation:  rotateAntiClockwise 7s linear infinite, rotateClockwise 7s linear infinite
+  }
+  .logorr{
+    width:1%;
+    height: auto;
+    animation: rotateClockwise 7s linear infinite, rotateAntiClockwise 7s linear infinite
+  }
+  .logoll{
+    margin-left: 20vw;
+    width:1%;
+    height: auto;
+    animation:  rotateAntiClockwise 7s linear infinite, rotateClockwise 7s linear infinite
+  }
+
+  .expand {
+    font-size: 1.5vw;
+    display: block;
+    margin: 1%;
+    margin-left: 2%;
+    position: relative;
+    bottom: 0;
+    width: 95%;
+    height: auto;
+    background-color: #9d589b;
+    color: rgb(255, 255, 255);
+  }
+
+  .orderedList {
+    transition: 2s;
+    background-color: rgba(88, 71, 151, 0.296);
+    margin-bottom: 10%;
+  }
+
+  audio {
+    padding-bottom: 0%;
+    margin-top: 2%;
+    margin-bottom: 4%;
+    width: 60vw;
+    height: 5vh;
+  }
+
+  .listopti {
+    background-color: #160b0bef;
+    color: rgb(255, 255, 255);
+  }
+
+  .he {
+    color: #eec3ed;
+  }
+
+  .Season-title {
+    display: block;
+    text-align: center;
+    /* Changed 'float' to 'text-align' */
+    font-size: 5vw;
+    background-color: #f700ff63;
+    color: rgba(0, 132, 255);
+  }
+
+  li {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 90%;
+    border: 2px solid #e778e3;
+    border-radius: 20px;
+    background-color: rgba(255, 123, 0, 0.82);
+    padding: 0 8%;
+    /* Combined padding properties */
+    margin-bottom: 0;
+    margin-left: 5%;
+  }
+
+  /* Add a CSS class for expanded sections */
+  .my-content.isNowOpen {
+    position: fixed;
+    padding-right: 5%;
+    top: 0;
+    left: 0;
+    width: fit-content;
+    height: 100%;
+    background-color: white;
+    overflow-y: auto;
+    z-index: 1;
+    transition: 2s ease;
+  }
+button{
+  width:30vw;
+  height:5vw;
+  font-size: 3vw;
+}
+
+  /* Style the close button for expanded sections */
+  .my-content.isNowOpen button.close-button {
+    transition: 2s ease;
+    position: absolute;
+    width:15%;
+    height:10%;
+    top: 10px;
+    right: 10px;
+    background-color: #000000;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .reimg {
+    width: 100%;
+    z-index: -1;
+    position: fixed;
+    height: 100%;
+  }
+
+  /* Add this CSS code to style your podcast list */
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+
+  /* Add this CSS rule to control visibility */
+  .hideable {
+    display: none;
+    /* Initially hide elements with class 'orderedList' */
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Style the dropdown items (links) */
+  .dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .mainorder {
+
+    max-width: 40%;
+    width: 40%;
+    height: 95%;
+    background: rgb(37, 26, 84);
+    border-radius: 5%;
+    border: solid;
+    border-color: #9d589b;
+
+  }
+  select{
+    height: 10%;
+  }
+  /* Add this CSS code to style your podcast list */
+  .ulgrid {
+    width: 100vw;
+    gap: 1%;
+    height: 44vw;
+    display: flex;
+    overflow-x: auto;
+  overflow-y: hidden;
+  }
+
+  .ulgrid::-webkit-scrollbar {
+    width: 10%;
+  }
+
+
+  .ulgrid.likesMode {
+    width: 100vw;
+    gap: 1%;
+    height: 44vw;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .mainorder.likesMode {
+    max-width: 40%;
+    width: 40%;
+    height: 95%;
+    background: rgb(37, 26, 84);
+    border-radius: 5%;
+    border: solid;
+    border-color: #9d589b;
+
+  }
+
+
+  .collapsible-section {
+    position: relative;
+  }
+
+  .floatright {
+    position: fixed;
+    z-index: 999;
+    top: 1vw;
+    right: 1vw;
+    left: 79vw;
+    width: 20%;
+    height: 7%;
+    margin-bottom: 0;
+    background-color: rgba(68, 3, 58, 0.459);
+    color: rgb(255, 255, 255);
+  }
+
+  .floating-button {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+
+  .container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  /* Style for the podcast title */
+  h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  /* Style for the podcast description */
+  p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.5vw;
+  }
+
+  /* Style for season and episode headings */
+  h2,
+  h3 {
+    color: #444;
+    font-size: 20px;
+  }
+
+  img.episode-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Style for individual episode items */
+
+  /* Style for episode images */
+  .imga {
+    float: bottom;
+    width: 50%;
+    height: 30%;
+    display: block;
+    margin-left: 23%;
+  }
+
+  .titles {
+    font-size: 1.5vw;
+    padding-top: 0%;
+    padding-bottom: 1%;
+    padding-left:10%;
+    padding-right: 1%;
+    overflow-y: auto;
+    margin: 0;
+    position: center;
+    color: white;
+    width: 25vw;
+    height: 2vw;
+  }
+  .genres{
+    font-size: 3vw;
+    display: flex;
+    overflow-x: hidden;
   
-}
-}
+    overflow-y: auto;
 
-.logo{
-  width:3.5%;
-  height: auto;
-  animation: rotateClockwise 7s linear infinite, rotateAntiClockwise 7s linear infinite
-}
-.logo_l{
-  margin-left: 20vw;
-  width:3.5%;
-  height: auto;
-  animation:  rotateAntiClockwise 7s linear infinite, rotateClockwise 7s linear infinite
-}
-.logorr{
-  width:1%;
-  height: auto;
-  animation: rotateClockwise 7s linear infinite, rotateAntiClockwise 7s linear infinite
-}
-.logoll{
-  margin-left: 20vw;
-  width:1%;
-  height: auto;
-  animation:  rotateAntiClockwise 7s linear infinite, rotateClockwise 7s linear infinite
-}
 
-.expand {
-  font-size: 1.5vw;
-  display: block;
-  margin: 1%;
-  margin-left: 2%;
-  position: relative;
-  bottom: 0;
-  width: 95%;
-  height: auto;
-  background-color: #9d589b;
-  color: rgb(255, 255, 255);
-}
+  }
 
-.orderedList {
-  transition: 2s;
-  background-color: rgba(88, 71, 151, 0.296);
-  margin-bottom: 10%;
-}
+  .heart{ position: right;
+    padding-top:10% ;
+      background-color: #33333300;
+      outline: none;
+      display: inline-block;
+      margin-left: 35%;
+      width: 20%;
+      height: 20%;
+      aspect-ratio: 1;
+      border-image: radial-gradient(rgb(88, 71, 151) 69%, #0000 70%) 84.5%/50%;
+      clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+      cursor: pointer; /* Add cursor pointer to make it clear it's clickable */
+      animation: unpulse 0.5s 1 alternate; /* Add a pulsing animation */
+    }
+  
+    .heart_like {
+      position: right;
+      background-color: #33333300;
+      outline: none;
+      display: inline-block;
+      margin-left: 35%;
+      width: 20%;
+      aspect-ratio: 1;
+      border-image: radial-gradient(#e778e3 69%, #0000 70%) 84.5%/50%;
+      clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+      animation: pulse 0.5s 1 alternate; /* Add a pulsing animation */
+    }
 
-audio {
-  padding-bottom: 0%;
-  margin-top: 2%;
-  margin-bottom: 4%;
-  width: 60vw;
-  height: 5vh;
-}
+  .descriptions {
+    font-size: 1.5vw;
+  
+    height: 15%;
+    font-size: 0.9rem;
+    /* Fixed font-size value */
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    color: rgba(var(--color-dark), 0.8);
+  }
 
-.listopti {
-  background-color: #160b0bef;
-  color: rgb(255, 255, 255);
+@media (max-width:759px){
+  .ulgrid {
+    width: 250vw;
+    gap: 1%;
+    height: 300vh;
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: auto;
+    align-content: flex-start;
+    flex-direction: column;
 }
+p{font-size: 2vw;}
 
-.he {
-  color: #eec3ed;
-}
-
-.Season-title {
-  display: block;
-  text-align: center;
-  /* Changed 'float' to 'text-align' */
+.genres{
   font-size: 5vw;
-  background-color: #f700ff63;
-  color: rgba(0, 132, 255);
 }
 
-li {
-  overflow-x: hidden;
-  overflow-y: hidden;
-  width: 90%;
-  border: 2px solid #e778e3;
-  border-radius: 20px;
-  background-color: rgba(255, 123, 0, 0.82);
-  padding: 0 8%;
-  /* Combined padding properties */
-  margin-bottom: 0;
-  margin-left: 5%;
-}
-
-/* Add a CSS class for expanded sections */
-.my-content.isNowOpen {
-  position: fixed;
-  padding-right: 5%;
-  top: 0;
-  left: 0;
-  width: fit-content;
-  height: 100%;
-  background-color: white;
-  overflow-y: auto;
-  z-index: 1;
-  transition: 2s ease;
-}
-
-/* Style the close button for expanded sections */
-.my-content.isNowOpen button.close-button {
-  transition: 2s ease;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #fff;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.reimg {
-  width: 100%;
-  z-index: -1;
-  position: fixed;
-  height: 100%;
-}
-
-/* Add this CSS code to style your podcast list */
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  overflow-x: auto;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-
-/* Add this CSS rule to control visibility */
-.hideable {
-  display: none;
-  /* Initially hide elements with class 'orderedList' */
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Style the dropdown items (links) */
-.dropdown-content a {
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-.mainorder {
-
-  max-width: 40%;
-  width: 40%;
-  height: 95%;
-  background: rgb(37, 26, 84);
-  border-radius: 5%;
-  border: solid;
-  border-color: #9d589b;
-
-}
-select{
-  height: 10%;
-}
-/* Add this CSS code to style your podcast list */
-.ulgrid {
-  width: 100vw;
-  gap: 1%;
-  height: 44vw;
-  display: flex;
-  overflow-x: auto;
-overflow-y: hidden;
-}
-
-.ulgrid::-webkit-scrollbar {
-  width: 10%;
-}
-
-
-.ulgrid.likesMode {
-  width: 100vw;
-  gap: 1%;
-  height: 44vw;
-  display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.mainorder.likesMode {
-  max-width: 40%;
-  width: 40%;
-  height: 95%;
-  background: rgb(37, 26, 84);
-  border-radius: 5%;
-  border: solid;
-  border-color: #9d589b;
-
-}
-
-
-.collapsible-section {
-  position: relative;
-}
-
-.floatright {
-  position: fixed;
-  z-index: 999;
-  top: 1vw;
-  right: 1vw;
-  left: 79vw;
-  width: 20%;
-  height: 7%;
-  margin-bottom: 0;
-  background-color: rgba(68, 3, 58, 0.459);
-  color: rgb(255, 255, 255);
-}
-
-.floating-button {
-  position: absolute;
-  z-index: 999;
-  top: 0;
-  right: 0;
-  background-color: #007bff;
-  color: #fff;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-}
-
-.container {
-  font-family: Arial, sans-serif;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-/* Style for the podcast title */
-h1 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-/* Style for the podcast description */
-p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1.5vw;
-}
-
-/* Style for season and episode headings */
-h2,
-h3 {
-  color: #444;
-  font-size: 20px;
-}
-
-img.episode-image {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Style for individual episode items */
-
-/* Style for episode images */
 .imga {
   float: bottom;
-  width: 50%;
-  height: 30%;
+  width: 50vw;
+  height: 35vw;
   display: block;
   margin-left: 23%;
 }
 
 .titles {
-  font-size: 1.5vw;
+  font-size: 3vw;
   padding-top: 0%;
-  padding-bottom: 1%;
-  padding-left:10%;
-  padding-right: 1%;
-  overflow-y: auto;
+  padding-bottom: 5%;
+  
   margin: 0;
   position: center;
   color: white;
-  width: 25vw;
-  height: 2vw;
+  width: 50vw;
 }
-.genres{
-  font-size:1vw;
-  display: flex;
-  overflow-x: hidden;
- 
-  overflow-y: auto;
-
+.dropdown-content{
+  font-size: 3vw;
 }
 
-.descriptions {
-  font-size: 1.5vw;
- 
-  height: 15%;
-  font-size: 0.9rem;
-  /* Fixed font-size value */
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding-bottom: 0;
-  margin-bottom: 0;
-  color: rgba(var(--color-dark), 0.8);
 }

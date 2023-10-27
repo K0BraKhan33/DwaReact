@@ -23,7 +23,7 @@ export default function MediaPlayer() {
 
   return (
     <div id='media' className="ontop hideable">
-        <button class="x"id="x" onClick={()=>closeMedia()}>X</button>
+        <button className="x"id="x" onClick={()=>closeMedia()}>X</button>
       <img src="" alt="Episode Image" className="mediaImage" id="mediaImage"/>
       <button id="playpauseID" className="mediaPlayPause" onClick={togglePlayPause}>
         <h5 className="fonties">{buttonText}</h5>
