@@ -5,18 +5,22 @@ import sortLikes from "./SortByLike.jsx";
 import removeHideableClass from "./SortByDefault.jsx";
 import sortButton from "./sortAlphaUp.jsx";
 import sortDownButton from "./sortZatadown.jsx";
-import sortByGenre from "./SortByGenre";
+import sortByGenre from "./SortByGenre.js";
 import { useLocation, useSearchParams } from 'react-router-dom';
+import Fuse from 'fuse.js'
+import { fuzzySearch } from "./fuzzy_search.js";
 import { fetchData } from "./advance.js";
+import MediaPlayer from "./mediaPlayer.jsx";
+import Greetings from "./faidOutGreet.jsx";
 const searchParams = new URLSearchParams(location.search);
 const username = searchParams.get('username');
 const password = searchParams.get('password');
-
 import { createClient } from '@supabase/supabase-js';
+import { resetUserLikes } from "./reset.js";
+
 
   const supabaseUrl = 'https://fguewcoipjtuyqdrcbyn.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZndWV3Y29pcGp0dXlxZHJjYnluIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc2MzI3NTMsImV4cCI6MjAxMzIwODc1M30.nFtZKKkIdw5OnJ7WKg0Zgfg0qDZCwUBfoAMKApZTdEA';
-
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZndWV3Y29pcGp0dXlxZHJjYnluIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc2MzI3NTMsImV4cCI6MjAxMzIwODc1M30.nFtZKKkIdw5OnJ7WKg0Zgfg0qDZCwUBfoAMKApZTdEA'
 
 
 const genreMap = {
@@ -30,6 +34,8 @@ const genreMap = {
   8: "News",
   9: "Kids and Family",
 };
+
+
 
 
 
@@ -51,6 +57,7 @@ function App() {
   const [openSections, setOpenSections] = useState([]); // Store the IDs of open sections
   const [searchParams] = useSearchParams();
   const [datalikes,setdata] = useState([]);
+  const [searchParam, setParam]=useState('');
   const username = searchParams.get('username');
   const password = searchParams.get('password');
 
@@ -82,8 +89,18 @@ function App() {
     fetchData();
   }, []);
 
-console.log(datalikes)
-  
+
+  if (loading) {
+    return <Greetings />;
+  }
+
+
+
+
+
+const titlesArray = podcastData.map(podcast => podcast.title);
+
+
 
   async function fetchPodcastSpefData(uniqueID) {
     try {
@@ -97,11 +114,14 @@ console.log(datalikes)
   }
 
   function GetSpesInfo({ uniqueID, episodeImage, isOpen, toggleOpen, episode }) {
+    const [podcastId, setID] = useState('');
     const [childPodcastData, setChildPodcastData] = useState([]);
     const [childLoading, setChildLoading] = useState(true);
     const [childError, setChildError] = useState(null);
 
+
     useEffect(() => {
+      setID(uniqueID)
       async function fetchData() {
         try {
           const childData = await fetchPodcastSpefData(uniqueID);
@@ -117,13 +137,47 @@ console.log(datalikes)
     }, [uniqueID]);
 
     if (childLoading) {
-      return <button className="expand">{isOpen ? "Expanding" : "Collapsing"}</button>;
+      return <h3>internal files loading</h3>;
     }
 
     if (childError) {
       return <div>Error: {childError.message}</div>;
     }
+function sendSource(buttonSource,btnID){
 
+
+            
+    
+  // Add a click event listener to the button
+ 
+      // Change the src attribute of the image when the button is clicked
+   const posStart=buttonSource.indexOf("^")+1
+   const posEnd = buttonSource.indexOf("#")
+   const result  = buttonSource.substring(posStart,posEnd)
+  
+   //if play then display
+   
+
+  const audiosync = document.getElementById("audioId");
+  const image = document.getElementById("mediaImage");
+  const currentPlaying = document.getElementById("currentPlay")
+ 
+  const soundDiv= document.getElementById("media")
+  currentPlaying.innerText=`season: ${result.split('_')[0]} episode ${result.split('_')[1]}`
+
+
+
+
+  audiosync.src = buttonSource.split('#')[1];
+  image.src = buttonSource.split('^')[0];
+  audiosync.play()
+  if (!audiosync.paused){
+ 
+    soundDiv.classList.remove("hideable")
+  }
+
+  
+}
     return (
       <div>
         {isOpen && (
@@ -131,7 +185,7 @@ console.log(datalikes)
             <img src={episodeImage} alt="Episode Image" className="reimg" />
             {childPodcastData.seasons.map((season) => (
               <li
-                key={`season-${uniqueID}-${season.title}`}
+                key={`season-${uniqueID}-${season.title}-${season.season}`}
                 className="orderedList"
               >
                 <button onClick={fullcollapse} id="uniqua" className="floatright">
@@ -140,16 +194,14 @@ console.log(datalikes)
                 <h1 className="Season-title">Season: {season.season} ({season.title})</h1>
                 <ul>
                   {season.episodes.map((episode) => (
-                    <li key={`episode-${uniqueID}-${season.title}-${episode.title}`} className="listopti">
+                    <li key={`episode-${uniqueID}-${season.title}-${episode.title}-${episode.episode}`} className="listopti">
                       <h3 className="he">
                         Season:{season.season} Episode: {episode.episode}
                       </h3>
                       {episode.title}
-                      <h5 className="descriptions">{episode.description}</h5>
-                      <audio controls>
-                        <source src={episode.file} type="audio/mp3" />
-                        <h1>{episode.id}</h1>
-                      </audio>
+                      <h5 className="descriptions">{episode.description}</h5>{`${podcastId}${season.season}${episode.episode}_${episode.file}`}
+                      <button id={`${episodeImage}^${season.season}_${episode.episode}#${episode.file}`} onClick={(e)=>{sendSource(e.target.id)}}> </button>
+                      
                     </li>
                   ))}
                 </ul>
@@ -189,24 +241,96 @@ if (boollog){
     window.location.href="/login"}
   }
 
-  return (
-    <div>
-      <h1> Search: <input type="text"> </input></h1>
 
-      <h1 className="intro"><img className="logo_l"type="png" src="./favicon_package_v0.16/android-chrome-512x512.png"></img> Listen Along With US <img className="logo"type="png" src="./favicon_package_v0.16/android-chrome-512x512.png"></img></h1>
-      <button onClick={ logout}>Log out</button>
-      <select onChange={handleSelectChange}>
+  function searchBar(){
+
+      const searchResult=fuzzySearch(titlesArray,searchParam)
+        // get back id by tital
+        let idsArray=[];
+        for (const setammount of searchResult ){
+
+         for (const podcast of podcastData){
+          if (podcast.title === setammount.item)
+          idsArray.push(podcast.id)
+       
+          
+        }
+        
+        }
+        
+          for (const setammount of searchResult) {
+           
+            
+        
+            // Loop through components and manipulate their classes
+            podcastData.forEach((podcast) => {
+              const element = document.getElementById(podcast.id);
+        
+              if (element) {
+                for (const lengths of idsArray){
+                
+                if (idsArray.includes(element.id)) {
+                  
+                  
+                  element.classList.remove("hideable"); // Remove "hideable" class
+                } else {
+                  element.classList.add("hideable"); // Add "hideable" class
+                }
+              }
+              }
+            });
+        }
+      
+   
+      }
+
+      /* 
+     loop through componenets Id where not in idsArray then add class hideable and if  in ids array check if the conponent in ids array has hideable and if it does remove it
+      
+      
+      */
+
+
+
+  return (
+  
+    <div> 
+             <div className="dropdown">
+        <button>Menu</button>
+        <div className="dropdown-content">
+        <h3>Search:<input type="text" onChange={(e) => searchBar(setParam(e.target.value))}/></h3>
+        <select onChange={handleSelectChange}>
         <option value="sortByDefault">Sort By Default</option>
         <option value="sortByLike">Sort By Like</option>
         <option value="sortZataDown">Sort Alpha Down</option>
         <option value="sortAlphaUp">Sort Alpha Up</option>
-      </select>
+      </select> 
+            <button onClick={ logout}>Log out</button>
+            <button onClick={ ()=>resetUserLikes(username,password)}>Reset likes</button>
+        </div>
+    </div>
+     <audio id="audioId" src=" " autoPlay style={{opacity:'0%'}}></audio>
+     
+      <h1 className="intro"><img className="logo_l"type="png" src="./favicon_package_v0.16/android-chrome-512x512.png"></img> Listen Along With US <img className="logo"type="png" src="./favicon_package_v0.16/android-chrome-512x512.png"></img></h1>
+    
 
       <div className="ulgrid">
         {podcastData.map((episode) => {
           const isOpen = openSections.includes(episode.id);
 
+          function imgChange(btnID){
+            const image = document.getElementById("mediaImage"  );
+            
+    
+            // Add a click event listener to the button
+           
+                // Change the src attribute of the image when the button is clicked
+                image.src = btnID.slice(3);
+
+          }
+
           const toggleOpen = () => {
+           
             if (isOpen) {
               setOpenSections((prevOpenSections) =>
                 prevOpenSections.filter((id) => id !== episode.id)
@@ -223,39 +347,43 @@ if (boollog){
 
             <div key={`episode-${episode.id}`} id={episode.id} className="mainorder" >
 
-              <h1>
-                <a
-                  href={`https://podcast-api.netlify.app/id/${episode.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {/*episode.id*/}
-                </a>
-              </h1>
-              <h2 className="titles">{episode.title}</h2>
-              <img src={episode.image} alt={`Episode ${episode.id} Image`} className="imga" />
-              <button onClick={toggleOpen} className="expand">
-                {isOpen ? "Collapse" : "Expand"} {/* Button to collapse/expand */}
-              </button>
-              <p className="descriptions">{episode.description}</p>
-              <p>Seasons: {episode.seasons}</p>
-              <p>
-            Genres:</p>
-            <div>
-  {episode.genres.map((genreId, index) => (
+       
+              <h2 className="titles">{episode.title} </h2>
+      
+              <div className="dropdown">
+        <button>Genres</button>
+        <div className="dropdown-content">
+                {episode.genres.map((genreId, index) => (
     <h2 className="genres" id={`${episode.id}_${genreId}`} onClick={(e) => sortByGenre(e.currentTarget.id, podcastData, setPodcastData)} key={index}>
       <span>{genreMap[genreId]}</span>
     </h2>
   ))}
+  
+  </div>
+  
+  </div>
+              <img src={episode.image} alt={`Episode ${episode.id} Image`} className="imga" />
+            
+              <button onClick={(e)=>toggleOpen()} className="expand" id={`btn${episode.image}`}>
+                {isOpen ? "Collapse" : "Expand"} {/* Button to collapse/expand */}
+              </button>
+              <p className="descriptions">{episode.description}</p>
+              <p>Seasons: {episode.seasons}</p>
+              
+              
+            
+            <div>
+
 </div>
-<button
+
+
+
+              <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
+              <button
   id={`like${episode.id}`}
   className={datalikes[0].User_likes.split(',').includes(`like${episode.id}`) ? "heart_like" : "heart"}
   onClick={() => toggleclass(`like${episode.id}`, username, password)}
 ></button>
-
-
-              <p>Updated: {new Date(episode.updated).toLocaleDateString()}</p>
               <div id="display_info">
                 <GetSpesInfo
                   uniqueID={episode.id}
@@ -270,7 +398,7 @@ if (boollog){
           );
         })}
       </div>
-      
+      <MediaPlayer/>
     </div>
   );
 }

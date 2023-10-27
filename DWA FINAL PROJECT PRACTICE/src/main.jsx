@@ -12,7 +12,7 @@ import { BrowserRouter, Route, Link, Routes, Outlet } from 'react-router-dom';
 function Mains() {
   return (
     <div>
-      {/* This is your main component content */}
+      {/* This is your main component content */} 
       <h1>Main Page</h1>
       <Outlet /> {/* This is where nested route content will be rendered */}
     </div>

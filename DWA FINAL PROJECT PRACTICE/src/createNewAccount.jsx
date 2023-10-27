@@ -58,14 +58,17 @@ export default function NewAccounts() {
       if (error) {
         window.alert("Error creating the account.");
       } else {
-        window.alert("Account created: Username - " + username + " Password - " + passwordFirst);
+        window.alert("Account created");
+        window.location.href = `/login`
       }
     } catch (error) {
       console.error("An error occurred:", error);
     }
   }
 
-  return (
+  return (<div>
+    <h1 className="intro"><img className="logo_l"type="png" src="./favicon_package_v0.16/android-chrome-512x512.png"></img> Listen Along With US <img className="logo       "type="png" src="./favicon_package_v0.16/android-chrome-512x512.png"></img></h1>
+    
     <div className="body" id="newdetails">
       <h3 className="qur" id="newUsername">
         Login: <input className="inputs" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -81,5 +84,6 @@ export default function NewAccounts() {
         <button className="btn" onClick={()=>window.location.href="/login"}>Cancel</button>
       </div>
     </div>
+    </div>  
   );
 }
