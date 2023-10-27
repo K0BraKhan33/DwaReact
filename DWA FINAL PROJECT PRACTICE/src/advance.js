@@ -32,6 +32,7 @@ async function advance(username, password) {
     }
   } else {
     console.log('Data not available');
+    
   }
 }
 
