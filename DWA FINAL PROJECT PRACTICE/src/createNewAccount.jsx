@@ -52,14 +52,14 @@ export default function NewAccounts() {
     try {
       const { data, error } = await supabase
         .from('Logins')
-        .insert([{ Login_Id: (datalength+1),UserName: username, Password: passwordFirst, User_likes: 'aaaaaaaaaa' }])  // Corrected
+        .insert([{ Login_Id: (datalength+1),UserName: username, Password: passwordFirst, User_likes: '' }])  // Corrected
 
 
       if (error) {
         window.alert("Error creating the account.");
       } else {
         window.alert("Account created");
-        window.location.href = `/login`
+        window.location.href = `/`
       }
     } catch (error) {
       console.error("An error occurred:", error);
@@ -81,7 +81,7 @@ export default function NewAccounts() {
       </h3>
       <div className="btnholder">
         <button className="btn" onClick={handleCreateAccount}>Create New Account</button>
-        <button className="btn" onClick={()=>window.location.href="/login"}>Cancel</button>
+        <button className="btn" onClick={()=>window.location.href="/"}>Cancel</button>
       </div>
     </div>
     </div>  

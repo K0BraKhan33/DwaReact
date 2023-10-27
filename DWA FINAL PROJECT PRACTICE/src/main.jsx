@@ -22,7 +22,7 @@ function Mains() {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
-      <Route path="login" element={<Login />} />
+      <Route path="/" element={<Login />} />
       <Route path="mains" element={<App />} />
       <Route path="CreateAccount" element={<NewAccounts />} />
 

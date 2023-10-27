@@ -245,7 +245,7 @@ function sendSource(buttonSource,btnID){
   function logout(){
    const boollog= window.confirm(['Are you sure you want to log out'])
 if (boollog){
-    window.location.href="/login"}
+    window.location.href="/"}
   }
 
 
